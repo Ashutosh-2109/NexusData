@@ -1,0 +1,77 @@
+# ==========================================
+# NexusData Project .gitignore
+# ==========================================
+
+# --- Python Virtual Environments & Packages ---
+venv/
+backend/venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+*.whl
+
+# --- Byte-compiled / Optimized Python ---
+__pycache__/
+backend/**/__pycache__/
+*.py[cod]
+*$py.class
+*.so
+
+# --- Python Testing & Coverage ---
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+nosetests.xml
+coverage.xml
+
+# --- Environment & Secret Variables ---
+.env
+.env.*
+backend/.env
+backend/.env.*
+!.env.example
+!backend/.env.example
+*.pem
+*.key
+
+# --- Node / Frontend Dependencies ---
+node_modules/
+frontend/node_modules/
+.pnp
+.pnp.js
+
+# --- Next.js Build Outputs ---
+frontend/.next/
+.next/
+frontend/out/
+out/
+build/
+dist/
+
+# --- Next.js / TypeScript Caches ---
+*.tsbuildinfo
+next-env.d.ts
+
+# --- Logs & Debugging ---
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# --- Operating System & IDE Files ---
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# --- Temporary data / Cache ---
+temp/
+tmp/
+scratch/
+.cache/

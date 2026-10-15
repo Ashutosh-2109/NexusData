@@ -5,3 +5,7 @@ python-multipart
 python-dateutil
 thefuzz
 python-Levenshtein
+scipy
+scikit-learn
+python-dotenv
+requests
