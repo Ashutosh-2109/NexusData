@@ -61,13 +61,6 @@ export default function AIInsightPanel({
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [statusText, setStatusText] = useState<'idle' | 'generating' | 'generated' | 'failed'>('idle');
 
-  // Reset insight when relationship changes
-  React.useEffect(() => {
-    setInsight(null);
-    setErrorMsg(null);
-    setStatusText('idle');
-  }, [relationship?.variable_a, relationship?.variable_b, relationship?.dataset_a, relationship?.dataset_b]);
-
   if (!relationship) return null;
 
   const handleExplainWithAI = async () => {
@@ -101,7 +94,7 @@ export default function AIInsightPanel({
           'AI insight unavailable. The statistical relationship is still available.'
         );
       }
-    } catch (err: any) {
+    } catch (err: unknown) {
       setStatusText('failed');
       setErrorMsg('Failed to communicate with AI service. The statistical evidence remains valid.');
     } finally {

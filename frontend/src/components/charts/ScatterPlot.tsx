@@ -75,6 +75,7 @@ export default function ScatterPlot({
     if (!xVar || !yVar) return;
 
     let isMounted = true;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- Show loading when the selected variables change.
     setLoading(true);
     setError(null);
 

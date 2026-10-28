@@ -104,7 +104,7 @@ export default function InsightGraph({
   // AI Summary Modal
   const [graphSummaryOpen, setGraphSummaryOpen] = useState(false);
   const [summaryLoading, setSummaryLoading] = useState(false);
-  const [summaryData, setSummaryData] = useState<any | null>(null);
+  const [summaryData, setSummaryData] = useState<{overview: string; patterns: string[]} | null>(null);
   const [summaryError, setSummaryError] = useState<string | null>(null);
 
   const containerRef = useRef<HTMLDivElement>(null);
@@ -288,7 +288,7 @@ export default function InsightGraph({
           selector: 'edge',
           style: {
             'line-color': 'data(color)',
-            'line-style': 'data(line_style)' as any,
+            'line-style': 'data(line_style)' as cytoscape.Css.LineStyle,
             width: 'data(width)',
             'curve-style': 'bezier',
             opacity: 0.7,
@@ -310,7 +310,7 @@ export default function InsightGraph({
           style: {
             opacity: 1,
             'line-color': '#38bdf8',
-            width: 'data(width) + 2' as any,
+            width: (element: cytoscape.EdgeSingular) => Number(element.data('width')) + 2,
           },
         },
         // Dimmed Edge
@@ -325,7 +325,7 @@ export default function InsightGraph({
         name: layoutName,
         animate: false,
         padding: 40,
-      } as any,
+      } as cytoscape.LayoutOptions,
     });
 
     cyRef.current = cy;

@@ -36,6 +36,7 @@ import AIInsightPanel, { RelationshipData } from '../components/AIInsightPanel';
 import VisualizationModule from '../components/charts/VisualizationModule';
 import InsightGraph from '../components/InsightGraph';
 import { API_BASE } from '../config/api';
+import IndiaMap from '../components/india/IndiaMap';
 
 interface ColumnMeta {
   name: string;
@@ -56,6 +57,7 @@ interface FileSummary {
   detected_time_col: string | null;
   detected_location_col: string | null;
   columns: string[];
+  time_range?: {start: string; end: string} | null;
 }
 
 interface MergeSummary {
@@ -66,12 +68,13 @@ interface MergeSummary {
   time_range?: { start: string; end: string } | null;
   unique_locations?: string[];
   file_summaries?: FileSummary[];
+  overlap?: {start: string; end: string; hours: number} | null;
 }
 
 interface MergeResponse {
   message: string;
   summary: MergeSummary;
-  sample_data: Record<string, any>[];
+  sample_data: Record<string, unknown>[];
   correlations?: RelationshipData[];
   csv_download?: string;
 }
@@ -175,8 +178,8 @@ export default function Home() {
       setResult(data);
       setCurrentPage(1);
       setActiveTab('visualizations');
-    } catch (err: any) {
-      setError(err.message || 'An unexpected error occurred during processing.');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'An unexpected error occurred during processing.');
     } finally {
       setLoading(false);
       setLoadingStep('');
@@ -202,8 +205,8 @@ export default function Home() {
       setResult(data);
       setCurrentPage(1);
       setActiveTab('visualizations');
-    } catch (err: any) {
-      setError(err.message || 'Could not load bundled datasets. Please ensure backend is running.');
+    } catch (err: unknown) {
+      setError(err instanceof Error ? err.message : 'Could not load bundled datasets. Please ensure backend is running.');
     } finally {
       setLoading(false);
       setLoadingStep('');
@@ -267,7 +270,7 @@ export default function Home() {
   const processedCorrelations = useMemo(() => {
     if (!result?.correlations) return [];
 
-    let filtered = result.correlations.filter((rel) => {
+    const filtered = result.correlations.filter((rel) => {
       if (crossDatasetOnly && !rel.is_cross_dataset) return false;
       if (rel.sample_count < minSampleFilter) return false;
 
@@ -399,6 +402,7 @@ export default function Home() {
 
       {/* Main Container */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-6 py-8 space-y-10">
+        <IndiaMap />
         {/* Hero Section */}
         <section className="relative text-center space-y-4 pt-4 pb-2">
           <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-cyan-950/70 border border-cyan-800/50 text-cyan-300 text-xs font-medium shadow-inner">
@@ -810,7 +814,7 @@ export default function Home() {
                         <span className="text-xs text-slate-400 whitespace-nowrap">Sort:</span>
                         <select
                           value={corrSortBy}
-                          onChange={(e) => setCorrSortBy(e.target.value as any)}
+                          onChange={(e) => setCorrSortBy(e.target.value as typeof corrSortBy)}
                           className="bg-slate-900 border border-slate-800 rounded-lg px-2.5 py-2 text-xs text-slate-300 focus:outline-none focus:border-cyan-500 font-medium text-cyan-400"
                         >
                           <option value="strongest">Strongest Association</option>
@@ -1241,6 +1245,7 @@ export default function Home() {
                     <p className="text-xs text-slate-400">
                       Step-by-step transformations detected across each ingested dataset.
                     </p>
+                    <p className="text-xs text-cyan-300">Shared time window: {result.summary.overlap ? `${result.summary.overlap.start.slice(0, 16)} to ${result.summary.overlap.end.slice(0, 16)} (${result.summary.overlap.hours} hourly buckets)` : 'No overlap across all files'}</p>
                   </div>
 
                   {result.summary.file_summaries && result.summary.file_summaries.length > 0 ? (
@@ -1263,6 +1268,7 @@ export default function Home() {
                                 {file.resampled_rows.toLocaleString()} hourly buckets
                               </span>
                             </span>
+                            {file.time_range && <span className="text-[11px] text-slate-500">{file.time_range.start.slice(0, 16)} to {file.time_range.end.slice(0, 16)}</span>}
                           </div>
 
                           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 text-xs">
@@ -1320,6 +1326,7 @@ export default function Home() {
       {selectedRelationship && (
         <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4">
           <AIInsightPanel
+            key={`${selectedRelationship.dataset_a}:${selectedRelationship.variable_a}:${selectedRelationship.dataset_b}:${selectedRelationship.variable_b}`}
             relationship={selectedRelationship}
             contextInfo={{
               time_range: result?.summary?.time_range

@@ -86,6 +86,7 @@ export default function DistributionChart({
     if (!variable) return;
 
     let isMounted = true;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- Show loading when the selected variable changes.
     setLoading(true);
     setError(null);
 
