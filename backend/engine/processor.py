@@ -52,7 +52,10 @@ def normalize_cities(df, loc_col, master_cities=None):
     if not df[loc_col].dtype == 'object':
         return df, master_cities
         
-    df[loc_col] = df[loc_col].astype(str).str.lower().str.strip()
+    from live.registry import canonical_city
+    df[loc_col] = df[loc_col].astype(str).str.lower().str.strip().map(
+        lambda value: (canonical_city(value) or value).lower()
+    )
     unique_cities = df[loc_col].dropna().unique()
     
     if master_cities is None:
@@ -104,6 +107,7 @@ def process_and_merge_datasets(files_data):
                     df = df.resample('1h')[numeric_cols].mean().reset_index()
                     
                 processed_dfs.append(df)
+                time_values = pd.to_datetime(df[time_col], errors='coerce').dropna()
                 file_summaries.append({
                     "filename": file_data['filename'],
                     "original_rows": orig_rows,
@@ -111,7 +115,8 @@ def process_and_merge_datasets(files_data):
                     "resampled_rows": len(df),
                     "detected_time_col": time_col,
                     "detected_location_col": loc_col,
-                    "columns": orig_cols
+                    "columns": orig_cols,
+                    "time_range": {"start": time_values.min().isoformat(), "end": time_values.max().isoformat()} if not time_values.empty else None
                 })
         except Exception as e:
             print(f"Error processing file {file_data.get('filename')}: {e}")

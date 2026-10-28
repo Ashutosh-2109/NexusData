@@ -6,19 +6,44 @@ from engine.processor import process_and_merge_datasets
 from engine.correlation import discover_correlations
 from engine.gemini_insights import generate_relationship_insight, generate_graph_summary
 from engine.visualization import get_scatter_data, get_timeseries_data, get_distribution_data
+from live.routes import router as live_router
+from live.service import service as live_service
+from storage import load_merged, save_merged
 import os
 import io
+import json
+import logging
+import time
 import pandas as pd
 import numpy as np
 from typing import Optional, List, Dict, Any
 
 app = FastAPI(title="Cross-Domain Insight Discovery Engine API")
+app.include_router(live_router)
+
+class JSONFormatter(logging.Formatter):
+    def format(self, record):
+        return json.dumps({"time": self.formatTime(record), "level": record.levelname,
+            "logger": record.name, "message": record.getMessage()})
+
+handler = logging.StreamHandler()
+handler.setFormatter(JSONFormatter())
+logging.basicConfig(level=os.getenv("LOG_LEVEL", "INFO"), handlers=[handler], force=True)
+request_logger = logging.getLogger("nexusdata.requests")
+
+@app.middleware("http")
+async def log_requests(request, call_next):
+    started = time.perf_counter()
+    response = await call_next(request)
+    request_logger.info("%s %s status=%d duration_ms=%.1f", request.method, request.url.path,
+        response.status_code, (time.perf_counter() - started) * 1000)
+    return response
 
 # Enable CORS for Next.js frontend
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=True,
+    allow_origins=[origin.strip() for origin in os.getenv("CORS_ORIGINS", "http://localhost:3000,http://127.0.0.1:3000").split(",") if origin.strip()],
+    allow_credentials=False,
     allow_methods=["*"],
     allow_headers=["*"],
 )
@@ -44,7 +69,12 @@ def ensure_latest_merged_data():
     df = LATEST_MERGED_DATA.get("df")
     file_summaries = LATEST_MERGED_DATA.get("file_summaries")
     if df is None or df.empty:
-        files_to_load = ["raw_aqi.csv", "raw_weather.csv", "load_data.csv"]
+        df, file_summaries = load_merged()
+        if df is not None and not df.empty:
+            LATEST_MERGED_DATA["df"] = df
+            LATEST_MERGED_DATA["file_summaries"] = file_summaries
+            return df, file_summaries
+        files_to_load = ["raw_aqi.csv", "raw_weather.csv", "demo_load_overlap.csv"]
         files_data = []
         for fname in files_to_load:
             path = os.path.join(DATA_DIR, fname)
@@ -61,6 +91,10 @@ def ensure_latest_merged_data():
 async def health_check():
     return {"status": "ok", "service": "NexusData Engine"}
 
+@app.get("/health")
+async def container_health():
+    return await health_check()
+
 @app.get("/api/sample-files")
 async def list_sample_files():
     sample_files = []
@@ -75,9 +109,9 @@ async def list_sample_files():
     return {"sample_files": sample_files}
 
 @app.post("/api/load-samples")
-async def load_samples():
+async def load_samples(include_live: bool = False):
     """Load default sample files (AQI, Weather, Load) automatically."""
-    files_to_load = ["raw_aqi.csv", "raw_weather.csv", "load_data.csv"]
+    files_to_load = ["raw_aqi.csv", "raw_weather.csv", "demo_load_overlap.csv"]
     files_data = []
     for fname in files_to_load:
         path = os.path.join(DATA_DIR, fname)
@@ -90,10 +124,14 @@ async def load_samples():
     if not files_data:
         return JSONResponse(status_code=404, content={"message": "Sample files not found on server"})
     
+    if include_live:
+        live_csv = live_service.live_csv_bytes()
+        if live_csv:
+            files_data.append({"filename": "live_india.csv", "content": live_csv})
     return execute_merge(files_data)
 
 @app.post("/api/upload-and-merge")
-async def upload_and_merge(files: list[UploadFile] = File(...)):
+async def upload_and_merge(files: list[UploadFile] = File(...), include_live: bool = False):
     if not files:
         return JSONResponse(status_code=400, content={"message": "No files uploaded"})
         
@@ -106,6 +144,10 @@ async def upload_and_merge(files: list[UploadFile] = File(...)):
                 "content": content
             })
             
+        if include_live:
+            live_csv = live_service.live_csv_bytes()
+            if live_csv:
+                files_data.append({"filename": "live_india.csv", "content": live_csv})
         return execute_merge(files_data)
         
     except Exception as e:
@@ -306,9 +348,15 @@ def execute_merge(files_data: list):
         # Cache for correlation analysis
         LATEST_MERGED_DATA["df"] = merged_df
         LATEST_MERGED_DATA["file_summaries"] = file_summaries
+        save_merged(merged_df, file_summaries)
 
         row_count = len(merged_df)
         columns = list(merged_df.columns)
+        ranges = [summary.get("time_range") for summary in file_summaries if summary.get("time_range")]
+        overlap_start = max((pd.Timestamp(item["start"]) for item in ranges), default=None)
+        overlap_end = min((pd.Timestamp(item["end"]) for item in ranges), default=None)
+        overlap_hours = max(0, int((overlap_end - overlap_start).total_seconds() // 3600) + 1) if overlap_start is not None and overlap_end is not None else 0
+        overlap = {"start": overlap_start.isoformat(), "end": overlap_end.isoformat(), "hours": overlap_hours} if overlap_hours else None
         
         # Sort by Standardized_Time if available
         if 'Standardized_Time' in merged_df.columns:
@@ -388,7 +436,8 @@ def execute_merge(files_data: list):
                 "columns_meta": columns_meta,
                 "time_range": time_range,
                 "unique_locations": unique_locations,
-                "file_summaries": file_summaries
+                "file_summaries": file_summaries,
+                "overlap": overlap
             },
             "sample_data": sample_data,
             "correlations": correlations,
