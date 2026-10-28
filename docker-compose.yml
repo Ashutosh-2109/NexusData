@@ -1,0 +1,35 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      OPENAQ_API_KEY: ${OPENAQ_API_KEY:-}
+      WAQI_TOKEN: ${WAQI_TOKEN:-}
+      DATA_GOV_IN_KEY: ${DATA_GOV_IN_KEY:-}
+      DATA_GOV_IN_RESOURCE_ID: ${DATA_GOV_IN_RESOURCE_ID:-}
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      CORS_ORIGINS: ${CORS_ORIGINS:-http://localhost:3000,http://127.0.0.1:3000}
+      NEXUSDATA_DB_PATH: /app/backend/storage/nexusdata.sqlite
+    volumes:
+      - nexusdata_storage:/app/backend/storage
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=3)"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: http://127.0.0.1:8000
+    ports:
+      - "3000:3000"
+    depends_on:
+      backend:
+        condition: service_healthy
+volumes:
+  nexusdata_storage:
