@@ -1,0 +1,10 @@
+{
+  "version": "1.0.0",
+  "rules": [
+    {"id":"aq-spike-1","focus_area":"Air Quality","severity":["moderate","high"],"pattern":"pm25_hourly_spike","action":"Review traffic and dust-control timing during observed PM2.5 peaks","expected_direction":"Lower PM2.5 during repeated peak hours if the source is confirmed","confidence":"low","limitations":"Hourly model values do not identify emissions sources; confirm with local station data before action."},
+    {"id":"aq-elevated-1","focus_area":"Air Quality","severity":["moderate","high"],"pattern":"pm25_elevated","action":"Investigate local PM2.5 sources and assess dust-control options","expected_direction":"Lower particulate exposure if the identified source is addressed","confidence":"low","limitations":"Model concentration alone cannot attribute pollution to traffic, construction, or other sources."},
+    {"id":"aq-monitor-1","focus_area":"Air Quality","severity":["low","moderate","high"],"pattern":"pm25_available","action":"Compare model PM2.5 with local monitoring before selecting interventions","expected_direction":"Improve confidence in the local air-quality assessment","confidence":"moderate","limitations":"This is a monitoring recommendation, not evidence that air quality is worsening."},
+    {"id":"heat-high-1","focus_area":"Heat Stress","severity":["moderate","high"],"pattern":"temperature_extreme","action":"Review heat-action readiness and shaded public-space coverage","expected_direction":"Reduce heat exposure if deployed in areas with verified vulnerability","confidence":"low","limitations":"Temperature is modeled; exposure, humidity, and vulnerable population are not fully represented."},
+    {"id":"energy-correlation-1","focus_area":"Energy Demand","severity":["moderate","high"],"pattern":"load_temperature_correlation","action":"Evaluate demand-response options near observed heat-related load peaks","expected_direction":"Reduce peak electricity demand if the relationship persists under intervention","confidence":"low","limitations":"Correlation is not causal and the fitted line may fail outside observed conditions."}
+  ]
+}

@@ -1,0 +1,12 @@
+.git
+.env
+backend/.env
+backend/venv
+backend/storage
+backend/__pycache__
+backend/**/__pycache__
+frontend/node_modules
+frontend/.next
+frontend/.env*
+data/state_source
+*.pyc

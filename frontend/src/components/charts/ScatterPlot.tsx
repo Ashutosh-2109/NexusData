@@ -1,17 +1,10 @@
 'use client';
 
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   TrendingUp,
-  Activity,
-  Layers,
-  Sparkles,
   RefreshCw,
   Info,
-  Sliders,
-  Check,
-  ToggleLeft,
-  ToggleRight
 } from 'lucide-react';
 import { API_BASE } from '../../config/api';
 
@@ -67,7 +60,7 @@ export default function ScatterPlot({
   // SVG dimensions
   const svgWidth = 720;
   const svgHeight = 420;
-  const margin = { top: 30, right: 30, bottom: 50, left: 60 };
+  const margin = useMemo(() => ({ top: 30, right: 30, bottom: 50, left: 60 }), []);
   const innerWidth = svgWidth - margin.left - margin.right;
   const innerHeight = svgHeight - margin.top - margin.bottom;
 
@@ -75,6 +68,7 @@ export default function ScatterPlot({
     if (!xVar || !yVar) return;
 
     let isMounted = true;
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- Show loading when the selected variables change.
     setLoading(true);
     setError(null);
 
@@ -88,7 +82,7 @@ export default function ScatterPlot({
           setError(json.message || 'Failed to load scatter plot data.');
         }
       })
-      .catch((err) => {
+      .catch(() => {
         if (!isMounted) return;
         setError('Error connecting to backend visualization API.');
       })

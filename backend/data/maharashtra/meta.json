@@ -1,0 +1,1167 @@
+{
+  "title": "Maharashtra district reference indicators",
+  "source_workbook": "Maharashtra_Combined_Datasets_Processed.xlsx",
+  "source_note": "User-supplied workbook; source publishers and update dates have not been independently authenticated.",
+  "temporal_scope": "Cross-sectional snapshot. Reference years vary or are unspecified; fields do not share a common year.",
+  "district_count": 36,
+  "district_ids": [
+    {
+      "id": "ahilyanagar",
+      "name": "Ahilyanagar"
+    },
+    {
+      "id": "akola",
+      "name": "Akola"
+    },
+    {
+      "id": "amravati",
+      "name": "Amravati"
+    },
+    {
+      "id": "beed",
+      "name": "Beed"
+    },
+    {
+      "id": "bhandara",
+      "name": "Bhandara"
+    },
+    {
+      "id": "buldhana",
+      "name": "Buldhana"
+    },
+    {
+      "id": "chandrapur",
+      "name": "Chandrapur"
+    },
+    {
+      "id": "chhatrapati_sambhajinagar",
+      "name": "Chhatrapati Sambhajinagar"
+    },
+    {
+      "id": "dharashiv",
+      "name": "Dharashiv"
+    },
+    {
+      "id": "dhule",
+      "name": "Dhule"
+    },
+    {
+      "id": "gadchiroli",
+      "name": "Gadchiroli"
+    },
+    {
+      "id": "gondia",
+      "name": "Gondia"
+    },
+    {
+      "id": "hingoli",
+      "name": "Hingoli"
+    },
+    {
+      "id": "jalgaon",
+      "name": "Jalgaon"
+    },
+    {
+      "id": "jalna",
+      "name": "Jalna"
+    },
+    {
+      "id": "kolhapur",
+      "name": "Kolhapur"
+    },
+    {
+      "id": "latur",
+      "name": "Latur"
+    },
+    {
+      "id": "mumbai_city",
+      "name": "Mumbai City"
+    },
+    {
+      "id": "mumbai_suburban",
+      "name": "Mumbai Suburban"
+    },
+    {
+      "id": "nagpur",
+      "name": "Nagpur"
+    },
+    {
+      "id": "nanded",
+      "name": "Nanded"
+    },
+    {
+      "id": "nandurbar",
+      "name": "Nandurbar"
+    },
+    {
+      "id": "nashik",
+      "name": "Nashik"
+    },
+    {
+      "id": "palghar",
+      "name": "Palghar"
+    },
+    {
+      "id": "parbhani",
+      "name": "Parbhani"
+    },
+    {
+      "id": "pune",
+      "name": "Pune"
+    },
+    {
+      "id": "raigad",
+      "name": "Raigad"
+    },
+    {
+      "id": "ratnagiri",
+      "name": "Ratnagiri"
+    },
+    {
+      "id": "sangli",
+      "name": "Sangli"
+    },
+    {
+      "id": "satara",
+      "name": "Satara"
+    },
+    {
+      "id": "sindhudurg",
+      "name": "Sindhudurg"
+    },
+    {
+      "id": "solapur",
+      "name": "Solapur"
+    },
+    {
+      "id": "thane",
+      "name": "Thane"
+    },
+    {
+      "id": "wardha",
+      "name": "Wardha"
+    },
+    {
+      "id": "washim",
+      "name": "Washim"
+    },
+    {
+      "id": "yavatmal",
+      "name": "Yavatmal"
+    }
+  ],
+  "counts": {
+    "districts": 36,
+    "indicator_district_matches": 36,
+    "health_district_matches": 34,
+    "excluded_health_combined_rows": 1,
+    "census_districts": 35,
+    "census_rows": 105,
+    "industry_regions": 12,
+    "vehicle_offices": 49,
+    "airports": 19
+  },
+  "alias_table": {
+    "ahmadnagar": "Ahilyanagar",
+    "ahamednagar": "Ahilyanagar",
+    "ahamadnagar": "Ahilyanagar",
+    "amaravati": "Amravati",
+    "aurangabad": "Chhatrapati Sambhajinagar",
+    "chhatrapti sambhajinagar": "Chhatrapati Sambhajinagar",
+    "osmanabad": "Dharashiv",
+    "usmanabad": "Dharashiv",
+    "buldana": "Buldhana",
+    "gondiya": "Gondia",
+    "nanden": "Nanded",
+    "raigarh": "Raigad",
+    "raygad": "Raigad",
+    "bid": "Beed",
+    "b|d": "Beed",
+    "mumbai": "Mumbai City",
+    "sub urban mumbai": "Mumbai Suburban",
+    "suburban mumbai": "Mumbai Suburban",
+    "wash|m": "Washim",
+    "washim": "Washim"
+  },
+  "excluded_rows": {
+    "industry_state_total": 1,
+    "vehicle_region_subtotals": 14,
+    "airport_section_and_grand_totals": 3,
+    "health_division_and_state_totals": 7,
+    "district_indicator_footnotes": 1,
+    "brihan_mumbai_combined_health": 1
+  },
+  "quality_summary": [
+    {
+      "dataset": "Health facilities",
+      "source_rows": 42,
+      "analysis_rows": 35,
+      "excluded_rows": 7,
+      "interpretation": "35 local area rows (including Brihan Mumbai); six divisions and Maharashtra total excluded."
+    },
+    {
+      "dataset": "Industrial MPCB",
+      "source_rows": 13,
+      "analysis_rows": 12,
+      "excluded_rows": 1,
+      "interpretation": "MPCB regions are not identical to administrative districts."
+    },
+    {
+      "dataset": "Vehicle categories",
+      "source_rows": 63,
+      "analysis_rows": 49,
+      "excluded_rows": 14,
+      "interpretation": "Office + region subtotal overlap; these are stocks / class counts, not verified monthly flows."
+    },
+    {
+      "dataset": "Airport traffic",
+      "source_rows": 22,
+      "analysis_rows": 19,
+      "excluded_rows": 3,
+      "interpretation": "Domestic/international airport rows; section and grand totals excluded in comparisons."
+    },
+    {
+      "dataset": "District indicators",
+      "source_rows": 37,
+      "analysis_rows": 36,
+      "excluded_rows": 1,
+      "interpretation": "36 district observations + 1 explanatory footnote."
+    },
+    {
+      "dataset": "Census wide",
+      "source_rows": 35,
+      "analysis_rows": 35,
+      "excluded_rows": 0,
+      "interpretation": "2011 uses older boundaries; Palghar not separate in uploaded census source."
+    }
+  ],
+  "quality_rules": [
+    {
+      "source_or_rule": "DATA QUALITY | FIELD & JOIN RULES",
+      "applied_rule": "Data note",
+      "reason": "",
+      "result": null
+    },
+    {
+      "source_or_rule": "Dataset files have different times, spatial units and subtotal rows. Comparisons must respect the notes below.",
+      "applied_rule": "Data note",
+      "reason": "",
+      "result": null
+    },
+    {
+      "source_or_rule": "Buldana → Buldhana",
+      "applied_rule": "District spelling alias",
+      "reason": "Spelling varies by file",
+      "result": "Joined"
+    },
+    {
+      "source_or_rule": "Gondiya → Gondia",
+      "applied_rule": "District spelling alias",
+      "reason": "Spelling varies by file",
+      "result": "Joined"
+    },
+    {
+      "source_or_rule": "Nanden → Nanded",
+      "applied_rule": "Source spelling alias",
+      "reason": "Likely source typo, checked in context of state districts",
+      "result": "Joined"
+    },
+    {
+      "source_or_rule": "Raigarh → Raigad",
+      "applied_rule": "District spelling alias",
+      "reason": "Older English name",
+      "result": "Joined"
+    },
+    {
+      "source_or_rule": "Ahmadnagar → Ahilyanagar",
+      "applied_rule": "Renamed district",
+      "reason": "Modern name used by uploaded indicator data",
+      "result": "Joined"
+    },
+    {
+      "source_or_rule": "Aurangabad → Chhatrapati Sambhajinagar",
+      "applied_rule": "Renamed district",
+      "reason": "Modern name used in uploaded indicator data",
+      "result": "Joined"
+    },
+    {
+      "source_or_rule": "Osmanabad → Dharashiv",
+      "applied_rule": "Renamed district",
+      "reason": "Modern name used by uploaded health/indicator data",
+      "result": "Joined"
+    },
+    {
+      "source_or_rule": "Bid → Beed",
+      "applied_rule": "District spelling alias",
+      "reason": "Alternate transliteration",
+      "result": "Joined"
+    },
+    {
+      "source_or_rule": "Chhatrapti → Chhatrapati",
+      "applied_rule": "Source spelling correction",
+      "reason": "Likely file typo",
+      "result": "Joined"
+    },
+    {
+      "source_or_rule": "Mumbai → Mumbai City",
+      "applied_rule": "Source district alias",
+      "reason": "Census Mumbai separate from Mumbai Suburban",
+      "result": "Joined"
+    },
+    {
+      "source_or_rule": "Brihan Mumbai",
+      "applied_rule": "Do NOT split",
+      "reason": "Health source combines Mumbai City and Suburban",
+      "result": "Both district health values left empty"
+    },
+    {
+      "source_or_rule": "Thane (2011) & Palghar",
+      "applied_rule": "Do NOT split",
+      "reason": "Palghar became a separate district after 2011",
+      "result": "Palghar census left empty"
+    },
+    {
+      "source_or_rule": "Industry regional totals",
+      "applied_rule": "Do NOT join to districts",
+      "reason": "Region boundaries may differ",
+      "result": "Remains separate tab"
+    },
+    {
+      "source_or_rule": "RTO regional totals",
+      "applied_rule": "Do NOT add to office rows",
+      "reason": "Avoid overlap and double counting",
+      "result": "Remains separate tab"
+    },
+    {
+      "source_or_rule": "Airport sections",
+      "applied_rule": "Do NOT add to airport rows",
+      "reason": "Avoid double counting totals",
+      "result": "Remains separate tab"
+    },
+    {
+      "source_or_rule": "Missing - / N.A. / Neg",
+      "applied_rule": "Store blank, not zero",
+      "reason": "Unknown vs negligible is not a measured zero",
+      "result": "Preserved in source Notes"
+    },
+    {
+      "source_or_rule": "Indicator footnote ^",
+      "applied_rule": "Numeric portion extracted",
+      "reason": "Original footnote flag preserved in note field",
+      "result": "Footnote visible"
+    },
+    {
+      "source_or_rule": "Thane: includes Palghar (establishments)",
+      "applied_rule": "Ambiguous value left blank",
+      "reason": "Cannot attribute to post-split district",
+      "result": "Not used in master"
+    },
+    {
+      "source_or_rule": "Reference years unspecified",
+      "applied_rule": "Do NOT infer time alignment",
+      "reason": "Most files lack explicit dates",
+      "result": "Static comparison only"
+    },
+    {
+      "source_or_rule": "Coverage of DISTRICT Master",
+      "applied_rule": "Districts",
+      "reason": "Matched census 2011",
+      "result": "Matched health facilities"
+    },
+    {
+      "source_or_rule": "Maharashtra district indicators",
+      "applied_rule": 36,
+      "reason": 35,
+      "result": 34
+    },
+    {
+      "source_or_rule": "PROVENANCE",
+      "applied_rule": "Data note",
+      "reason": "Every upload is user-supplied; source publisher and update date have not been independently authenticated.",
+      "result": null
+    },
+    {
+      "source_or_rule": "NOT A SUBSTITUTE",
+      "applied_rule": "Data note",
+      "reason": "The 55 originally listed datasets still require separate official raw downloads for exact coverage.",
+      "result": null
+    },
+    {
+      "source_or_rule": "SOURCE VALIDATION",
+      "applied_rule": "Data note",
+      "reason": "Result Checked values Interpretation",
+      "result": null
+    },
+    {
+      "source_or_rule": "MPCB red/orange/green/white sums",
+      "applied_rule": "Data note",
+      "reason": "PASS Total row equals sum of 12 regional rows for 11 numeric fields Arithmetic only; source accuracy not independently verified",
+      "result": null
+    },
+    {
+      "source_or_rule": "Census male + female = total",
+      "applied_rule": "Data note",
+      "reason": "PASS 100 complete district-year records No internal inconsistencies detected in available records",
+      "result": null
+    },
+    {
+      "source_or_rule": "Domestic aircraft movements",
+      "applied_rule": "Data note",
+      "reason": "PASS 335,651 provided vs 335,651 summed airport records Section total equals listed domestic airports",
+      "result": null
+    },
+    {
+      "source_or_rule": "International aircraft movements",
+      "applied_rule": "Data note",
+      "reason": "PASS 69,806 provided vs 69,806 summed airport records Section total equals listed international airports",
+      "result": null
+    },
+    {
+      "source_or_rule": "DISTRICT MASTER",
+      "applied_rule": "Data note",
+      "reason": "36 distinct standardized districts 35 have uploaded census matches 34 have district-level health matches",
+      "result": null
+    }
+  ],
+  "statistics_note": "Ranks are descending (rank 1 is the largest value), percentile increases with the value, and difference is value minus the median of districts with data. These are descriptive reference statistics, not performance grades.",
+  "data_dictionary": {
+    "district": {
+      "label": "District",
+      "unit": "district name",
+      "source_sheet": "DISTRICT Master",
+      "caveat": "Reference years vary or are unspecified; supplied values are not independently authenticated."
+    },
+    "population_2011": {
+      "label": "Population 2011",
+      "unit": "people",
+      "source_sheet": "DISTRICT Master",
+      "caveat": "Census 2011 count; Palghar has no separate 2011 row in the supplied workbook."
+    },
+    "population_2001": {
+      "label": "Population 2001",
+      "unit": "people",
+      "source_sheet": "DISTRICT Master",
+      "caveat": "Census 2001 count on historical boundaries; do not treat as current district population."
+    },
+    "population_1991": {
+      "label": "Population 1991",
+      "unit": "people",
+      "source_sheet": "DISTRICT Master",
+      "caveat": "Census 1991 count on historical boundaries; blanks are not zero."
+    },
+    "population_growth_2001_11": {
+      "label": "Population growth 2001-11",
+      "unit": "fraction",
+      "source_sheet": "DISTRICT Master",
+      "caveat": "Workbook-derived 2001–2011 growth; historical boundaries and dates vary."
+    },
+    "density_2011": {
+      "label": "Density 2011",
+      "unit": "people/km²",
+      "source_sheet": "DISTRICT Master",
+      "caveat": "Census 2011 density; Palghar is blank because no separate 2011 district row exists."
+    },
+    "literacy_2011_percent": {
+      "label": "Literacy 2011 (%)",
+      "unit": "%",
+      "source_sheet": "DISTRICT Master",
+      "caveat": "Census 2011; not a current-year estimate."
+    },
+    "health_sub_centres": {
+      "label": "Health sub-centres",
+      "unit": "facilities",
+      "source_sheet": "DISTRICT Master",
+      "caveat": "Health sheet combines Brihan Mumbai; Mumbai City/Suburban are intentionally blank."
+    },
+    "primary_health_centres": {
+      "label": "Primary health centres",
+      "unit": "facilities",
+      "source_sheet": "DISTRICT Master",
+      "caveat": "Health sheet combines Brihan Mumbai; Mumbai City/Suburban are intentionally blank."
+    },
+    "dispensaries": {
+      "label": "Dispensaries",
+      "unit": "facilities",
+      "source_sheet": "DISTRICT Master",
+      "caveat": "Health sheet combines Brihan Mumbai; Mumbai City/Suburban are intentionally blank."
+    },
+    "sub_district_hospitals": {
+      "label": "Sub-district hospitals",
+      "unit": "facilities",
+      "source_sheet": "DISTRICT Master",
+      "caveat": "Health sheet combines Brihan Mumbai; Mumbai City/Suburban are intentionally blank."
+    },
+    "district_hospitals": {
+      "label": "District hospitals",
+      "unit": "facilities",
+      "source_sheet": "DISTRICT Master",
+      "caveat": "Health sheet combines Brihan Mumbai; Mumbai City/Suburban are intentionally blank."
+    },
+    "general_hospitals": {
+      "label": "General hospitals",
+      "unit": "facilities",
+      "source_sheet": "DISTRICT Master",
+      "caveat": "Health sheet combines Brihan Mumbai; Mumbai City/Suburban are intentionally blank."
+    },
+    "women_hospitals": {
+      "label": "Women hospitals",
+      "unit": "facilities",
+      "source_sheet": "DISTRICT Master",
+      "caveat": "Health sheet combines Brihan Mumbai; Mumbai City/Suburban are intentionally blank."
+    },
+    "rural_hospitals": {
+      "label": "Rural hospitals",
+      "unit": "facilities",
+      "source_sheet": "DISTRICT Master",
+      "caveat": "Health sheet combines Brihan Mumbai; Mumbai City/Suburban are intentionally blank."
+    },
+    "schools_per_10_sq_km": {
+      "label": "Schools per 10 sq km",
+      "unit": "schools/10 km²",
+      "source_sheet": "DISTRICT Master",
+      "caveat": "Source indicator; reference year is unspecified."
+    },
+    "secondary_dropout_percent": {
+      "label": "Secondary dropout (%)",
+      "unit": "%",
+      "source_sheet": "DISTRICT Master",
+      "caveat": "Secondary IX–X dropout; reference year is unspecified."
+    },
+    "forest_land_percent": {
+      "label": "Forest land (%)",
+      "unit": "%",
+      "source_sheet": "DISTRICT Master",
+      "caveat": "Reference year is unspecified; source coverage may vary."
+    },
+    "domestic_electricity_kwh_per_capita": {
+      "label": "Domestic electricity kWh per capita",
+      "unit": "kWh/person",
+      "source_sheet": "DISTRICT Master",
+      "caveat": "Reference year is unspecified; source units preserved."
+    },
+    "industrial_electricity_kwh_per_capita": {
+      "label": "Industrial electricity kWh per capita",
+      "unit": "kWh/person",
+      "source_sheet": "DISTRICT Master",
+      "caveat": "Reference year is unspecified; source units preserved."
+    },
+    "per_capita_income_source_units": {
+      "label": "Per capita income (source units)",
+      "unit": "source units",
+      "source_sheet": "DISTRICT Master",
+      "caveat": "Current-price source value; currency/year metadata is not supplied."
+    },
+    "vehicles_per_lakh": {
+      "label": "Vehicles per lakh",
+      "unit": "vehicles/100,000 people",
+      "source_sheet": "DISTRICT Master",
+      "caveat": "Stock/reference year is unspecified; not a monthly registration flow."
+    },
+    "underweight_severe_percent": {
+      "label": "Underweight severe (%)",
+      "unit": "%",
+      "source_sheet": "DISTRICT Master",
+      "caveat": "Children age 0–5; reference year is unspecified."
+    },
+    "underweight_moderate_percent": {
+      "label": "Underweight moderate (%)",
+      "unit": "%",
+      "source_sheet": "DISTRICT Master",
+      "caveat": "Children age 0–5; reference year is unspecified."
+    },
+    "census_match": {
+      "label": "Census match",
+      "unit": "match status",
+      "source_sheet": "DISTRICT Master",
+      "caveat": "Reference years vary or are unspecified; supplied values are not independently authenticated."
+    },
+    "health_match": {
+      "label": "Health match",
+      "unit": "match status",
+      "source_sheet": "DISTRICT Master",
+      "caveat": "Reference years vary or are unspecified; supplied values are not independently authenticated."
+    },
+    "join_coverage_warning": {
+      "label": "Join / coverage warning",
+      "unit": "text",
+      "source_sheet": "DISTRICT Master",
+      "caveat": "Reference years vary or are unspecified; supplied values are not independently authenticated."
+    },
+    "total_reported_health_facilities": {
+      "label": "Total reported health facilities",
+      "unit": "facilities",
+      "source_sheet": "DISTRICT Master",
+      "caveat": "Sum of reported facility types only; blank combined-Mumbai districts remain unknown."
+    },
+    "data_district_indicators__district_source": {
+      "label": "District (source)",
+      "unit": "category",
+      "source_sheet": "DATA District Indicators",
+      "caveat": "Keep district rows only; exclude footnotes. Reference year is unspecified."
+    },
+    "data_district_indicators__district_standard": {
+      "label": "District (standard)",
+      "unit": "category",
+      "source_sheet": "DATA District Indicators",
+      "caveat": "Keep district rows only; exclude footnotes. Reference year is unspecified."
+    },
+    "data_district_indicators__row_type": {
+      "label": "Row type",
+      "unit": "text",
+      "source_sheet": "DATA District Indicators",
+      "caveat": "Keep district rows only; exclude footnotes. Reference year is unspecified."
+    },
+    "data_district_indicators__density_of_schools_per_10_sq_km": {
+      "label": "Density of schools (per 10 sq km)",
+      "unit": "per km²",
+      "source_sheet": "DATA District Indicators",
+      "caveat": "Keep district rows only; exclude footnotes. Reference year is unspecified."
+    },
+    "data_district_indicators__dropout_rate_secondary_ix_x": {
+      "label": "Dropout Rate (Secondary IX-X)",
+      "unit": "%",
+      "source_sheet": "DATA District Indicators",
+      "caveat": "Keep district rows only; exclude footnotes. Reference year is unspecified."
+    },
+    "data_district_indicators__dropout_rate_higher_secondary_xi_xii": {
+      "label": "Dropout Rate (Higher Secondary XI-XII)",
+      "unit": "%",
+      "source_sheet": "DATA District Indicators",
+      "caveat": "Keep district rows only; exclude footnotes. Reference year is unspecified."
+    },
+    "data_district_indicators__ptr_elementary_i_vii": {
+      "label": "PTR Elementary (I-VII)",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA District Indicators",
+      "caveat": "Keep district rows only; exclude footnotes. Reference year is unspecified."
+    },
+    "data_district_indicators__ptr_secondary_ix_x": {
+      "label": "PTR Secondary (IX-X)",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA District Indicators",
+      "caveat": "Keep district rows only; exclude footnotes. Reference year is unspecified."
+    },
+    "data_district_indicators__ptr_higher_secondary_xi_xii": {
+      "label": "PTR Higher Secondary (XI-XII)",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA District Indicators",
+      "caveat": "Keep district rows only; exclude footnotes. Reference year is unspecified."
+    },
+    "data_district_indicators__percentage_of_forest_area_to_total_geographical_area": {
+      "label": "Percentage of forest area to total geographical area",
+      "unit": "%",
+      "source_sheet": "DATA District Indicators",
+      "caveat": "Keep district rows only; exclude footnotes. Reference year is unspecified."
+    },
+    "data_district_indicators__per_capita_domestic_consumption_electricity_kwh": {
+      "label": "Per capita domestic consumption electricity (kwh)",
+      "unit": "kWh (source units)",
+      "source_sheet": "DATA District Indicators",
+      "caveat": "Keep district rows only; exclude footnotes. Reference year is unspecified."
+    },
+    "data_district_indicators__per_capita_industrial_consumption_of_electricity_kwh": {
+      "label": "Per capita industrial consumption of electricity (kwh)",
+      "unit": "kWh (source units)",
+      "source_sheet": "DATA District Indicators",
+      "caveat": "Keep district rows only; exclude footnotes. Reference year is unspecified."
+    },
+    "data_district_indicators__number_of_establishments_per_lakh_population_economic_census_2013": {
+      "label": "Number of establishments per lakh population (economic census 2013)",
+      "unit": "per 100,000 people",
+      "source_sheet": "DATA District Indicators",
+      "caveat": "Keep district rows only; exclude footnotes. Reference year is unspecified."
+    },
+    "data_district_indicators__per_capita_income_at_current_prices": {
+      "label": "Per Capita Income at current prices",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA District Indicators",
+      "caveat": "Keep district rows only; exclude footnotes. Reference year is unspecified."
+    },
+    "data_district_indicators__number_of_banking_offices_per_lakh_pop": {
+      "label": "Number of banking offices per lakh pop",
+      "unit": "category",
+      "source_sheet": "DATA District Indicators",
+      "caveat": "Keep district rows only; exclude footnotes. Reference year is unspecified."
+    },
+    "data_district_indicators__credit_deposit_ratio": {
+      "label": "Credit-Deposit Ratio",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA District Indicators",
+      "caveat": "Keep district rows only; exclude footnotes. Reference year is unspecified."
+    },
+    "data_district_indicators__atms_per_lakh_pop": {
+      "label": "ATMS per lakh pop",
+      "unit": "per 100,000 people",
+      "source_sheet": "DATA District Indicators",
+      "caveat": "Keep district rows only; exclude footnotes. Reference year is unspecified."
+    },
+    "data_district_indicators__vehicles_per_lakh_pop": {
+      "label": "Vehicles per lakh pop",
+      "unit": "per 100,000 people",
+      "source_sheet": "DATA District Indicators",
+      "caveat": "Keep district rows only; exclude footnotes. Reference year is unspecified."
+    },
+    "data_district_indicators__percentage_of_severly_underweight_children_age_0_5": {
+      "label": "Percentage of severly underweight children (age 0-5)",
+      "unit": "%",
+      "source_sheet": "DATA District Indicators",
+      "caveat": "Keep district rows only; exclude footnotes. Reference year is unspecified."
+    },
+    "data_district_indicators__percentage_of_moderately_underweight_children_0_5_years": {
+      "label": "Percentage of moderately underweight children (0-5 years)",
+      "unit": "%",
+      "source_sheet": "DATA District Indicators",
+      "caveat": "Keep district rows only; exclude footnotes. Reference year is unspecified."
+    },
+    "data_district_indicators__notes": {
+      "label": "Notes",
+      "unit": "text",
+      "source_sheet": "DATA District Indicators",
+      "caveat": "Keep district rows only; exclude footnotes. Reference year is unspecified."
+    },
+    "data_health_facilities__district_source": {
+      "label": "District (source)",
+      "unit": "category",
+      "source_sheet": "DATA Health Facilities",
+      "caveat": "Use district rows only. Exclude divisions/state totals. Brihan Mumbai is combined and is never split between Mumbai City and Mumbai Suburban."
+    },
+    "data_health_facilities__district_standard": {
+      "label": "District (standard)",
+      "unit": "category",
+      "source_sheet": "DATA Health Facilities",
+      "caveat": "Use district rows only. Exclude divisions/state totals. Brihan Mumbai is combined and is never split between Mumbai City and Mumbai Suburban."
+    },
+    "data_health_facilities__row_type": {
+      "label": "Row type",
+      "unit": "text",
+      "source_sheet": "DATA Health Facilities",
+      "caveat": "Use district rows only. Exclude divisions/state totals. Brihan Mumbai is combined and is never split between Mumbai City and Mumbai Suburban."
+    },
+    "data_health_facilities__sub_centres": {
+      "label": "Sub-Centres",
+      "unit": "count / source unit",
+      "source_sheet": "DATA Health Facilities",
+      "caveat": "Use district rows only. Exclude divisions/state totals. Brihan Mumbai is combined and is never split between Mumbai City and Mumbai Suburban."
+    },
+    "data_health_facilities__primary_health_centres": {
+      "label": "Primary Health Centres",
+      "unit": "count / source unit",
+      "source_sheet": "DATA Health Facilities",
+      "caveat": "Use district rows only. Exclude divisions/state totals. Brihan Mumbai is combined and is never split between Mumbai City and Mumbai Suburban."
+    },
+    "data_health_facilities__dispensaries": {
+      "label": "Dispensaries",
+      "unit": "count / source unit",
+      "source_sheet": "DATA Health Facilities",
+      "caveat": "Use district rows only. Exclude divisions/state totals. Brihan Mumbai is combined and is never split between Mumbai City and Mumbai Suburban."
+    },
+    "data_health_facilities__sub_district_hospitals": {
+      "label": "Sub-District Hospitals",
+      "unit": "category",
+      "source_sheet": "DATA Health Facilities",
+      "caveat": "Use district rows only. Exclude divisions/state totals. Brihan Mumbai is combined and is never split between Mumbai City and Mumbai Suburban."
+    },
+    "data_health_facilities__district_hospitals": {
+      "label": "District Hospitals",
+      "unit": "category",
+      "source_sheet": "DATA Health Facilities",
+      "caveat": "Use district rows only. Exclude divisions/state totals. Brihan Mumbai is combined and is never split between Mumbai City and Mumbai Suburban."
+    },
+    "data_health_facilities__general_hospitals": {
+      "label": "General Hospitals",
+      "unit": "count / source unit",
+      "source_sheet": "DATA Health Facilities",
+      "caveat": "Use district rows only. Exclude divisions/state totals. Brihan Mumbai is combined and is never split between Mumbai City and Mumbai Suburban."
+    },
+    "data_health_facilities__women_hospitals": {
+      "label": "Women Hospitals",
+      "unit": "count / source unit",
+      "source_sheet": "DATA Health Facilities",
+      "caveat": "Use district rows only. Exclude divisions/state totals. Brihan Mumbai is combined and is never split between Mumbai City and Mumbai Suburban."
+    },
+    "data_health_facilities__rural_hospitals": {
+      "label": "Rural Hospitals",
+      "unit": "count / source unit",
+      "source_sheet": "DATA Health Facilities",
+      "caveat": "Use district rows only. Exclude divisions/state totals. Brihan Mumbai is combined and is never split between Mumbai City and Mumbai Suburban."
+    },
+    "data_health_facilities__notes": {
+      "label": "Notes",
+      "unit": "text",
+      "source_sheet": "DATA Health Facilities",
+      "caveat": "Use district rows only. Exclude divisions/state totals. Brihan Mumbai is combined and is never split between Mumbai City and Mumbai Suburban."
+    },
+    "census_yearly__district_standard": {
+      "label": "District (standard)",
+      "unit": "category",
+      "source_sheet": "CENSUS Yearly",
+      "caveat": "Historical district counts are retained for the sparkline; blank values are unknown and boundaries change over time."
+    },
+    "census_yearly__district_source": {
+      "label": "District (source)",
+      "unit": "category",
+      "source_sheet": "CENSUS Yearly",
+      "caveat": "Historical district counts are retained for the sparkline; blank values are unknown and boundaries change over time."
+    },
+    "census_yearly__census_year": {
+      "label": "Census year",
+      "unit": "source unit not specified",
+      "source_sheet": "CENSUS Yearly",
+      "caveat": "Historical district counts are retained for the sparkline; blank values are unknown and boundaries change over time."
+    },
+    "census_yearly__male": {
+      "label": "Male",
+      "unit": "source unit not specified",
+      "source_sheet": "CENSUS Yearly",
+      "caveat": "Historical district counts are retained for the sparkline; blank values are unknown and boundaries change over time."
+    },
+    "census_yearly__female": {
+      "label": "Female",
+      "unit": "source unit not specified",
+      "source_sheet": "CENSUS Yearly",
+      "caveat": "Historical district counts are retained for the sparkline; blank values are unknown and boundaries change over time."
+    },
+    "census_yearly__population": {
+      "label": "Population",
+      "unit": "count / source unit",
+      "source_sheet": "CENSUS Yearly",
+      "caveat": "Historical district counts are retained for the sparkline; blank values are unknown and boundaries change over time."
+    },
+    "census_yearly__density_persons_per_sq_km": {
+      "label": "Density (persons per sq km)",
+      "unit": "per km²",
+      "source_sheet": "CENSUS Yearly",
+      "caveat": "Historical district counts are retained for the sparkline; blank values are unknown and boundaries change over time."
+    },
+    "census_yearly__sex_ratio_females_per_1000_males": {
+      "label": "Sex ratio (females per 1000 males)",
+      "unit": "females per 1,000 males",
+      "source_sheet": "CENSUS Yearly",
+      "caveat": "Historical district counts are retained for the sparkline; blank values are unknown and boundaries change over time."
+    },
+    "census_yearly__literacy_rate_percent": {
+      "label": "Literacy rate (%)",
+      "unit": "%",
+      "source_sheet": "CENSUS Yearly",
+      "caveat": "Historical district counts are retained for the sparkline; blank values are unknown and boundaries change over time."
+    },
+    "census_yearly__data_note": {
+      "label": "Data note",
+      "unit": "source unit not specified",
+      "source_sheet": "CENSUS Yearly",
+      "caveat": "Historical district counts are retained for the sparkline; blank values are unknown and boundaries change over time."
+    },
+    "data_industry_mpcb__mpcb_region": {
+      "label": "MPCB region",
+      "unit": "category",
+      "source_sheet": "DATA Industry MPCB",
+      "caveat": "Keep MPCB regions separate; they are not administrative districts. Exclude state total."
+    },
+    "data_industry_mpcb__row_type": {
+      "label": "Row type",
+      "unit": "text",
+      "source_sheet": "DATA Industry MPCB",
+      "caveat": "Keep MPCB regions separate; they are not administrative districts. Exclude state total."
+    },
+    "data_industry_mpcb__red_large": {
+      "label": "Red Large",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA Industry MPCB",
+      "caveat": "Keep MPCB regions separate; they are not administrative districts. Exclude state total."
+    },
+    "data_industry_mpcb__red_medium": {
+      "label": "Red Medium",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA Industry MPCB",
+      "caveat": "Keep MPCB regions separate; they are not administrative districts. Exclude state total."
+    },
+    "data_industry_mpcb__red_small": {
+      "label": "Red Small",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA Industry MPCB",
+      "caveat": "Keep MPCB regions separate; they are not administrative districts. Exclude state total."
+    },
+    "data_industry_mpcb__orange_large": {
+      "label": "Orange Large",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA Industry MPCB",
+      "caveat": "Keep MPCB regions separate; they are not administrative districts. Exclude state total."
+    },
+    "data_industry_mpcb__orange_medium": {
+      "label": "Orange Medium",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA Industry MPCB",
+      "caveat": "Keep MPCB regions separate; they are not administrative districts. Exclude state total."
+    },
+    "data_industry_mpcb__orange_small": {
+      "label": "Orange Small",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA Industry MPCB",
+      "caveat": "Keep MPCB regions separate; they are not administrative districts. Exclude state total."
+    },
+    "data_industry_mpcb__green_large": {
+      "label": "Green Large",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA Industry MPCB",
+      "caveat": "Keep MPCB regions separate; they are not administrative districts. Exclude state total."
+    },
+    "data_industry_mpcb__green_medium": {
+      "label": "Green Medium",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA Industry MPCB",
+      "caveat": "Keep MPCB regions separate; they are not administrative districts. Exclude state total."
+    },
+    "data_industry_mpcb__green_small": {
+      "label": "Green Small",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA Industry MPCB",
+      "caveat": "Keep MPCB regions separate; they are not administrative districts. Exclude state total."
+    },
+    "data_industry_mpcb__white": {
+      "label": "White",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA Industry MPCB",
+      "caveat": "Keep MPCB regions separate; they are not administrative districts. Exclude state total."
+    },
+    "data_industry_mpcb__total": {
+      "label": "Total",
+      "unit": "count / source unit",
+      "source_sheet": "DATA Industry MPCB",
+      "caveat": "Keep MPCB regions separate; they are not administrative districts. Exclude state total."
+    },
+    "data_industry_mpcb__notes": {
+      "label": "Notes",
+      "unit": "text",
+      "source_sheet": "DATA Industry MPCB",
+      "caveat": "Keep MPCB regions separate; they are not administrative districts. Exclude state total."
+    },
+    "data_vehicle_categories__transport_office_grouping_source": {
+      "label": "Transport office / grouping (source)",
+      "unit": "category",
+      "source_sheet": "DATA Vehicle Categories",
+      "caveat": "Keep office/local-area rows only; exclude region subtotals to avoid double counting. These are stocks, not monthly flows."
+    },
+    "data_vehicle_categories__office_grouping_cleaned": {
+      "label": "Office / grouping cleaned",
+      "unit": "category",
+      "source_sheet": "DATA Vehicle Categories",
+      "caveat": "Keep office/local-area rows only; exclude region subtotals to avoid double counting. These are stocks, not monthly flows."
+    },
+    "data_vehicle_categories__row_type": {
+      "label": "Row type",
+      "unit": "text",
+      "source_sheet": "DATA Vehicle Categories",
+      "caveat": "Keep office/local-area rows only; exclude region subtotals to avoid double counting. These are stocks, not monthly flows."
+    },
+    "data_vehicle_categories__motor_cycles": {
+      "label": "Motor Cycles",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA Vehicle Categories",
+      "caveat": "Keep office/local-area rows only; exclude region subtotals to avoid double counting. These are stocks, not monthly flows."
+    },
+    "data_vehicle_categories__scooters": {
+      "label": "Scooters",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA Vehicle Categories",
+      "caveat": "Keep office/local-area rows only; exclude region subtotals to avoid double counting. These are stocks, not monthly flows."
+    },
+    "data_vehicle_categories__moped": {
+      "label": "Moped",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA Vehicle Categories",
+      "caveat": "Keep office/local-area rows only; exclude region subtotals to avoid double counting. These are stocks, not monthly flows."
+    },
+    "data_vehicle_categories__cars": {
+      "label": "Cars",
+      "unit": "count / source unit",
+      "source_sheet": "DATA Vehicle Categories",
+      "caveat": "Keep office/local-area rows only; exclude region subtotals to avoid double counting. These are stocks, not monthly flows."
+    },
+    "data_vehicle_categories__jeeps": {
+      "label": "Jeeps",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA Vehicle Categories",
+      "caveat": "Keep office/local-area rows only; exclude region subtotals to avoid double counting. These are stocks, not monthly flows."
+    },
+    "data_vehicle_categories__stn_wagons": {
+      "label": "Stn. Wagons",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA Vehicle Categories",
+      "caveat": "Keep office/local-area rows only; exclude region subtotals to avoid double counting. These are stocks, not monthly flows."
+    },
+    "data_vehicle_categories__taxis_meter_fited": {
+      "label": "Taxis meter fited",
+      "unit": "count / source unit",
+      "source_sheet": "DATA Vehicle Categories",
+      "caveat": "Keep office/local-area rows only; exclude region subtotals to avoid double counting. These are stocks, not monthly flows."
+    },
+    "data_vehicle_categories__luxury_turist_cabs": {
+      "label": "Luxury /Turist Cabs",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA Vehicle Categories",
+      "caveat": "Keep office/local-area rows only; exclude region subtotals to avoid double counting. These are stocks, not monthly flows."
+    },
+    "data_vehicle_categories__auto_rikshaws": {
+      "label": "Auto-rikshaws",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA Vehicle Categories",
+      "caveat": "Keep office/local-area rows only; exclude region subtotals to avoid double counting. These are stocks, not monthly flows."
+    },
+    "data_vehicle_categories__stage_carriages": {
+      "label": "Stage carriages",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA Vehicle Categories",
+      "caveat": "Keep office/local-area rows only; exclude region subtotals to avoid double counting. These are stocks, not monthly flows."
+    },
+    "data_vehicle_categories__contract_carriages_mini_bus": {
+      "label": "Contract carriages /Mini Bus",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA Vehicle Categories",
+      "caveat": "Keep office/local-area rows only; exclude region subtotals to avoid double counting. These are stocks, not monthly flows."
+    },
+    "data_vehicle_categories__school_buses": {
+      "label": "School Buses",
+      "unit": "count / source unit",
+      "source_sheet": "DATA Vehicle Categories",
+      "caveat": "Keep office/local-area rows only; exclude region subtotals to avoid double counting. These are stocks, not monthly flows."
+    },
+    "data_vehicle_categories__private_service_vehicles": {
+      "label": "Private Service Vehicles",
+      "unit": "count / source unit",
+      "source_sheet": "DATA Vehicle Categories",
+      "caveat": "Keep office/local-area rows only; exclude region subtotals to avoid double counting. These are stocks, not monthly flows."
+    },
+    "data_vehicle_categories__ambulances": {
+      "label": "Ambulances",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA Vehicle Categories",
+      "caveat": "Keep office/local-area rows only; exclude region subtotals to avoid double counting. These are stocks, not monthly flows."
+    },
+    "data_vehicle_categories__articulated_multi": {
+      "label": "Articulated/Multi.",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA Vehicle Categories",
+      "caveat": "Keep office/local-area rows only; exclude region subtotals to avoid double counting. These are stocks, not monthly flows."
+    },
+    "data_vehicle_categories__trucks_lorries": {
+      "label": "Trucks & Lorries",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA Vehicle Categories",
+      "caveat": "Keep office/local-area rows only; exclude region subtotals to avoid double counting. These are stocks, not monthly flows."
+    },
+    "data_vehicle_categories__tanker": {
+      "label": "Tanker",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA Vehicle Categories",
+      "caveat": "Keep office/local-area rows only; exclude region subtotals to avoid double counting. These are stocks, not monthly flows."
+    },
+    "data_vehicle_categories__delivery_van_4_wheelers": {
+      "label": "Delivery Van (4 wheelers)",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA Vehicle Categories",
+      "caveat": "Keep office/local-area rows only; exclude region subtotals to avoid double counting. These are stocks, not monthly flows."
+    },
+    "data_vehicle_categories__delivery_van_3_wheelers": {
+      "label": "Delivery Van (3 wheelers)",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA Vehicle Categories",
+      "caveat": "Keep office/local-area rows only; exclude region subtotals to avoid double counting. These are stocks, not monthly flows."
+    },
+    "data_vehicle_categories__tractors": {
+      "label": "Tractors",
+      "unit": "count / source unit",
+      "source_sheet": "DATA Vehicle Categories",
+      "caveat": "Keep office/local-area rows only; exclude region subtotals to avoid double counting. These are stocks, not monthly flows."
+    },
+    "data_vehicle_categories__trailors": {
+      "label": "Trailors",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA Vehicle Categories",
+      "caveat": "Keep office/local-area rows only; exclude region subtotals to avoid double counting. These are stocks, not monthly flows."
+    },
+    "data_vehicle_categories__others": {
+      "label": "Others",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA Vehicle Categories",
+      "caveat": "Keep office/local-area rows only; exclude region subtotals to avoid double counting. These are stocks, not monthly flows."
+    },
+    "data_vehicle_categories__total_across_vehicle_classes": {
+      "label": "Total across vehicle classes",
+      "unit": "count / source unit",
+      "source_sheet": "DATA Vehicle Categories",
+      "caveat": "Keep office/local-area rows only; exclude region subtotals to avoid double counting. These are stocks, not monthly flows."
+    },
+    "data_vehicle_categories__notes": {
+      "label": "Notes",
+      "unit": "text",
+      "source_sheet": "DATA Vehicle Categories",
+      "caveat": "Keep office/local-area rows only; exclude region subtotals to avoid double counting. These are stocks, not monthly flows."
+    },
+    "data_airport_traffic__airport_grouping": {
+      "label": "Airport / grouping",
+      "unit": "category",
+      "source_sheet": "DATA Airport Traffic",
+      "caveat": "Keep airport rows only; exclude domestic/international section totals and grand total."
+    },
+    "data_airport_traffic__traffic_type": {
+      "label": "Traffic type",
+      "unit": "source unit not specified",
+      "source_sheet": "DATA Airport Traffic",
+      "caveat": "Keep airport rows only; exclude domestic/international section totals and grand total."
+    },
+    "data_airport_traffic__row_type": {
+      "label": "Row type",
+      "unit": "text",
+      "source_sheet": "DATA Airport Traffic",
+      "caveat": "Keep airport rows only; exclude domestic/international section totals and grand total."
+    },
+    "data_airport_traffic__aircraft_movement_handled_no_2022_23": {
+      "label": "Aircraft movement handled (no.) 2022-23",
+      "unit": "count / source unit",
+      "source_sheet": "DATA Airport Traffic",
+      "caveat": "Keep airport rows only; exclude domestic/international section totals and grand total."
+    },
+    "data_airport_traffic__aircraft_movement_handled_no_2023_24": {
+      "label": "Aircraft movement handled (no.) 2023-24",
+      "unit": "count / source unit",
+      "source_sheet": "DATA Airport Traffic",
+      "caveat": "Keep airport rows only; exclude domestic/international section totals and grand total."
+    },
+    "data_airport_traffic__passenger_traffic_2022_23_lakhs": {
+      "label": "Passenger Traffic 2022-23 (Lakhs)",
+      "unit": "lakhs",
+      "source_sheet": "DATA Airport Traffic",
+      "caveat": "Keep airport rows only; exclude domestic/international section totals and grand total."
+    },
+    "data_airport_traffic__passenger_traffic_2023_24_lakhs": {
+      "label": "Passenger Traffic 2023-24 (Lakhs)",
+      "unit": "lakhs",
+      "source_sheet": "DATA Airport Traffic",
+      "caveat": "Keep airport rows only; exclude domestic/international section totals and grand total."
+    },
+    "data_airport_traffic__cargo_mt_2022_23": {
+      "label": "Cargo (MT) 2022-23",
+      "unit": "count / source unit",
+      "source_sheet": "DATA Airport Traffic",
+      "caveat": "Keep airport rows only; exclude domestic/international section totals and grand total."
+    },
+    "data_airport_traffic__cargo_mt_2023_24": {
+      "label": "Cargo (MT) (2023-24)",
+      "unit": "count / source unit",
+      "source_sheet": "DATA Airport Traffic",
+      "caveat": "Keep airport rows only; exclude domestic/international section totals and grand total."
+    },
+    "data_airport_traffic__notes": {
+      "label": "Notes",
+      "unit": "text",
+      "source_sheet": "DATA Airport Traffic",
+      "caveat": "Keep airport rows only; exclude domestic/international section totals and grand total."
+    },
+    "health_facilities_per_lakh": {
+      "label": "Health facilities per lakh population",
+      "unit": "facilities/100,000 people",
+      "source_sheet": "DISTRICT Master",
+      "caveat": "Derived from reported facilities and Population 2011. Not computed where health coverage or population is missing; population is from 2011."
+    }
+  }
+}

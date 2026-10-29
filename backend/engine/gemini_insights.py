@@ -32,6 +32,7 @@ Avoid:
 - definitely results in
 Identify possible explanations only as hypotheses.
 Base the explanation strictly on the provided statistical evidence.
+Never invent figures or omit stated limitations. Recommendations are candidate checks, not policy guidance.
 Mention uncertainty when appropriate.
 Return structured JSON only matching the requested schema.
 """
