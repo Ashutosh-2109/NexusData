@@ -6,11 +6,7 @@ import {
   AlertTriangle,
   Lightbulb,
   CheckCircle,
-  Clock,
-  Layers,
-  HelpCircle,
   RefreshCw,
-  ExternalLink,
   ShieldCheck,
   ChevronRight,
   X
@@ -94,7 +90,7 @@ export default function AIInsightPanel({
           'AI insight unavailable. The statistical relationship is still available.'
         );
       }
-    } catch (err: unknown) {
+    } catch {
       setStatusText('failed');
       setErrorMsg('Failed to communicate with AI service. The statistical evidence remains valid.');
     } finally {

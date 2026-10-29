@@ -2,15 +2,9 @@
 
 import React, { useState, useMemo } from 'react';
 import {
-  ScatterChart,
   LineChart,
   BarChart2,
-  Filter,
-  Calendar,
-  Layers,
-  MapPin,
   TrendingUp,
-  Sparkles,
   Database
 } from 'lucide-react';
 import ScatterPlot from './ScatterPlot';

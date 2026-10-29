@@ -21,6 +21,8 @@ describe('live stream hook', () => {
     vi.stubGlobal('EventSource', FakeEventSource);
     const {result, unmount} = renderHook(() => useLiveCities());
     await waitFor(() => expect(result.current.status).toBe('offline'));
+    act(() => FakeEventSource.latest.onerror?.());
+    expect(result.current.status).toBe('offline');
     act(() => FakeEventSource.latest.snapshot(next));
     expect(result.current.status).toBe('live');
     expect(result.current.snapshot?.cities).toHaveLength(1);

@@ -2,15 +2,8 @@
 
 import React, { useState, useEffect, useMemo } from 'react';
 import {
-  BarChart3,
-  Sliders,
   RefreshCw,
   Info,
-  Layers,
-  HelpCircle,
-  TrendingUp,
-  Percent,
-  AlertCircle
 } from 'lucide-react';
 import { API_BASE } from '../../config/api';
 
@@ -78,7 +71,7 @@ export default function DistributionChart({
   // SVG dimensions
   const svgWidth = 760;
   const svgHeight = 380;
-  const margin = { top: 30, right: 30, bottom: 50, left: 60 };
+  const margin = useMemo(() => ({ top: 30, right: 30, bottom: 50, left: 60 }), []);
   const innerWidth = svgWidth - margin.left - margin.right;
   const innerHeight = svgHeight - margin.top - margin.bottom;
 
@@ -100,7 +93,7 @@ export default function DistributionChart({
           setError(json.message || 'Failed to load distribution data.');
         }
       })
-      .catch((err) => {
+      .catch(() => {
         if (!isMounted) return;
         setError('Error connecting to backend distribution API.');
       })

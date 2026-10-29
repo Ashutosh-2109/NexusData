@@ -24,7 +24,7 @@ export function useLiveCities() {
         setSnapshot(data); setStatus(data.status); setError(data.error);
       } catch { setError('Invalid live update'); }
     });
-    stream.onerror = () => { if (mounted) setStatus((current) => current === 'loading' ? 'offline' : 'stale'); };
+    stream.onerror = () => { if (mounted) setStatus((current) => current === 'loading' ? 'offline' : current === 'live' ? 'stale' : current); };
     return () => { mounted = false; controller.abort(); stream.close(); };
   }, []);
 

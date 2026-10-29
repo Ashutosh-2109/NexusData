@@ -1,16 +1,11 @@
 'use client';
 
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
-  Calendar,
   MapPin,
   Clock,
-  Activity,
-  Layers,
   RefreshCw,
   Info,
-  Sliders,
-  Filter,
   AlertTriangle
 } from 'lucide-react';
 import { API_BASE } from '../../config/api';
@@ -71,7 +66,7 @@ export default function TimeSeriesChart({
   // SVG dimensions
   const svgWidth = 800;
   const svgHeight = 400;
-  const margin = { top: 30, right: 30, bottom: 50, left: 65 };
+  const margin = useMemo(() => ({ top: 30, right: 30, bottom: 50, left: 65 }), []);
   const innerWidth = svgWidth - margin.left - margin.right;
   const innerHeight = svgHeight - margin.top - margin.bottom;
 
@@ -108,7 +103,7 @@ export default function TimeSeriesChart({
           setError(json.message || 'Failed to load time series data.');
         }
       })
-      .catch((err) => {
+      .catch(() => {
         if (!isMounted) return;
         setError('Error connecting to backend time series API.');
       })

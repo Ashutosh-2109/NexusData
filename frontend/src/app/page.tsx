@@ -6,7 +6,6 @@ import {
   FileSpreadsheet,
   Layers,
   Calendar,
-  MapPin,
   Activity,
   Download,
   RefreshCw,
@@ -15,9 +14,7 @@ import {
   Sparkles,
   CheckCircle2,
   AlertCircle,
-  ArrowRight,
   Trash2,
-  Clock,
   BarChart3,
   SlidersHorizontal,
   ChevronLeft,
@@ -27,10 +24,7 @@ import {
   Zap,
   TrendingUp,
   Link2,
-  Filter,
   Info,
-  LineChart,
-  X
 } from 'lucide-react';
 import AIInsightPanel, { RelationshipData } from '../components/AIInsightPanel';
 import VisualizationModule from '../components/charts/VisualizationModule';
@@ -86,6 +80,7 @@ export default function Home() {
   const [result, setResult] = useState<MergeResponse | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [activeTab, setActiveTab] = useState<'visualizations' | 'graph' | 'relationships' | 'explorer' | 'schema' | 'lineage'>('visualizations');
+  useEffect(() => { const target=window.location.hash.slice(1); const next=target==='insight-graph'?'graph':target==='relationships'?'relationships':target==='data-catalog'?'schema':target==='data-quality'?'lineage':null; if(next) requestAnimationFrame(()=>setActiveTab(next)); }, []);
   const [backendOnline, setBackendOnline] = useState<boolean | null>(null);
 
   // Selected relationship for AI Insight Panel
@@ -402,7 +397,7 @@ export default function Home() {
 
       {/* Main Container */}
       <main className="flex-1 max-w-7xl w-full mx-auto px-6 py-8 space-y-10">
-        <IndiaMap />
+        <section id="live-map"><IndiaMap /></section>
         {/* Hero Section */}
         <section className="relative text-center space-y-4 pt-4 pb-2">
           <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-cyan-950/70 border border-cyan-800/50 text-cyan-300 text-xs font-medium shadow-inner">
@@ -731,7 +726,7 @@ export default function Home() {
 
               {/* TAB: INSIGHT GRAPH */}
               {activeTab === 'graph' && result.correlations && (
-                <div className="p-6">
+                <div className="p-6" id="insight-graph">
                   <InsightGraph
                     relationships={result.correlations}
                     columnsMeta={result.summary.columns_meta}
@@ -743,7 +738,7 @@ export default function Home() {
                     onExplainWithAI={(rel) => {
                       setSelectedRelationship(rel);
                     }}
-                    onViewVisualization={(xVar, yVar) => {
+                    onViewVisualization={() => {
                       setActiveTab('visualizations');
                     }}
                     contextInfo={{

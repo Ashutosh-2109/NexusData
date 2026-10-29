@@ -1,12 +1,12 @@
 'use client';
 
 import { geoCentroid, geoMercator, geoPath } from 'd3-geo';
+import type { GeoPermissibleObjects } from 'd3-geo';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import type { Feature, GeoPermissibleObjects, Geometry } from 'geojson';
+import type { Feature, Geometry } from 'geojson';
 import { API_BASE } from '../../config/api';
 import type { DistrictStatistic, FieldInfo, MaharashtraDistrict, MaharashtraGeo, MaharashtraMeta } from './types';
 import MaharashtraInsights from './MaharashtraInsights';
-import MaharashtraStory from './MaharashtraStory';
 import MaharashtraStory from './MaharashtraStory';
 
 const PALETTE = ['#eff6ff', '#c6dbef', '#9ecae1', '#6baed6', '#3182bd', '#08519c'];
@@ -17,6 +17,7 @@ const METRIC_KEYS = [
   'industrial_electricity_kwh_per_capita', 'vehicles_per_lakh', 'underweight_severe_percent',
   'underweight_moderate_percent',
 ];
+const INSET_NAMES = ['Mumbai City', 'Mumbai Suburban', 'Thane', 'Palghar', 'Raigad'];
 const GROUPS: Array<{ title: string; fields: string[] }> = [
   { title: 'Demographics', fields: ['population_2011', 'population_growth_2001_11', 'density_2011', 'literacy_2011_percent'] },
   { title: 'Health infrastructure', fields: ['health_sub_centres', 'primary_health_centres', 'dispensaries', 'sub_district_hospitals', 'district_hospitals', 'general_hospitals', 'women_hospitals', 'rural_hospitals', 'total_reported_health_facilities', 'health_facilities_per_lakh'] },
@@ -151,6 +152,11 @@ export default function MaharashtraMap() {
   const cuts = valid.length ? [valid[0], valid[Math.floor((valid.length - 1) * .25)], valid[Math.floor((valid.length - 1) * .5)], valid[Math.floor((valid.length - 1) * .75)], valid.at(-1)!] : [];
   const projection = useMemo(() => geo ? geoMercator().fitSize([size.width - 28, size.height - 24], geo as GeoPermissibleObjects) : null, [geo, size]);
   const path = useMemo(() => projection ? geoPath(projection) : null, [projection]);
+  const insetFeatures = useMemo(() => geo ? geo.features.filter(feature => INSET_NAMES.includes(feature.properties.name)) : [], [geo]);
+  const insetWidth = size.width < 520 ? 132 : 184;
+  const insetHeight = size.width < 520 ? 142 : 174;
+  const insetProjection = useMemo(() => insetFeatures.length ? geoMercator().fitSize([insetWidth - 14, insetHeight - 14], { type: 'FeatureCollection', features: insetFeatures }) : null, [insetFeatures, insetWidth, insetHeight]);
+  const insetPath = useMemo(() => insetProjection ? geoPath(insetProjection) : null, [insetProjection]);
   const entries = useMemo(() => geo?.features.map(feature => {
     const d = byName.get(feature.properties.name);
     const centroid = projection ? projection(geoCentroid(feature as Feature<Geometry>)) : null;
@@ -168,7 +174,7 @@ export default function MaharashtraMap() {
     if (pin) setSelected(name);
   }, []);
 
-  const onMapKeyDown = (event: React.KeyboardEvent<SVGSVGElement>) => {
+  const onMapKeyDown = (event: React.KeyboardEvent<SVGElement>) => {
     const districtNames = entries.map(item => item.district!.name);
     if (event.key === 'Escape') { setHovered(null); setSelected(null); return; }
     const current = (event.target as SVGPathElement).dataset.district;
@@ -194,7 +200,7 @@ export default function MaharashtraMap() {
         {METRIC_KEYS.map(key => <option key={key} value={key}>{meta.data_dictionary[key]?.label ?? key}</option>)}
       </select></label>
       <label className="mah-search-label">Find district<input type="search" value={search} onChange={event => setSearch(event.target.value)} placeholder="Search by district name" aria-label="Search Maharashtra districts" />
-        {!!search && <div className="mah-search-results" role="listbox">{searchResults.map(district => <button key={district.id} type="button" role="option" aria-selected="false" onMouseEnter={() => setFocus(district.name)} onClick={() => { setSelected(district.name); setHovered(district.name); setSearch(''); }}>{district.name}</button>)}</div>}
+        {!!search && <div className="mah-search-results" role="listbox">{searchResults.map(district => <button key={district.id} type="button" role="option" aria-selected={selected === district.name} onMouseEnter={() => setFocus(district.name)} onClick={() => { setSelected(district.name); setHovered(district.name); setSearch(''); }}>{district.name}</button>)}</div>}
       </label>
       <p className="mah-data-label">{valid.length} of 36 districts have data · reference years vary / unspecified</p>
     </section>
@@ -225,6 +231,11 @@ export default function MaharashtraMap() {
                 <title>{name} · {fieldInfo?.label ?? metric}: {formatValue(value, fieldInfo)}</title>
               </path>;
             })}</g>
+            {insetPath && <g className="mah-inset" transform={`translate(${size.width - insetWidth - 12},${size.height - insetHeight - 12})`} aria-label="Magnified Mumbai, Thane, Palghar and Raigad inset">
+              <rect width={insetWidth} height={insetHeight} rx="7" fill="#fff" fillOpacity=".96" stroke="#657987" strokeWidth="1.2"/>
+              <text x="8" y="13" fontSize="8" fontWeight="700" fill="#344f61">MUMBAI · THANE DETAIL</text>
+              <g transform="translate(7,18)">{insetFeatures.map(feature => { const name=feature.properties.name; const district=byName.get(name); if (!district) return null; const value=metricValue(district,metric); return <path key={`inset-${district.id}`} data-district={name} d={insetPath(feature as GeoPermissibleObjects) ?? undefined} fill={colorAt(value,cuts)} stroke={hovered===name||selected===name?'#0d2438':'#fff'} strokeWidth={hovered===name||selected===name?2:1.4} tabIndex={0} role="button" aria-label={`${name} in magnified inset. ${formatValue(value,fieldInfo)}. Press Enter to pin details.`} onFocus={()=>setFocus(name)} onMouseEnter={()=>setFocus(name)} onClick={()=>{setSelected(name);setHovered(name);}} onKeyDown={onMapKeyDown}><title>{name} · {fieldInfo?.label ?? metric}: {formatValue(value,fieldInfo)}</title></path>; })}</g>
+            </g>}
           </svg>
           {hoveredDistrict && !selectedDistrict && <div className="mah-hover-card" style={{ left: Math.max(8, Math.min(cursor.x + 14, size.width - 370)), top: Math.max(8, Math.min(cursor.y + 12, size.height - 470)) }}>
             <DistrictCard district={hoveredDistrict} meta={meta} pinned={false} />
@@ -239,13 +250,9 @@ export default function MaharashtraMap() {
       </aside>
     </div>
 
-    {selectedDistrict && <DistrictCard district={selectedDistrict} meta={meta} pinned onClose={() => { setSelected(null); setHovered(null); }} />}`r`n    <MaharashtraStory districts={districts} meta={meta} />`r`n    <MaharashtraInsights districts={districts} />`r`n    <details id="maharashtra-data-notes" className="mah-data-notes"><summary>Data notes and coverage rules</summary><p>User-supplied workbook; not independently authenticated. Reference years vary or are unspecified. Blank values are unknown, never zero.</p><p>Brihan Mumbai health values are combined and not allocated between Mumbai City and Mumbai Suburban. Palghar has no 2011 census row; Mumbai Suburban has no income value. MPCB regions, RTO subtotals and airport groupings are not district records.</p><p>District polygons come from the OpenCity Maharashtra Districts Map listing, credited to Vaidyanathan R and identified as Survey of India source / public domain. See DATA_SOURCES for the source record and attribution.</p></details>
+    {selectedDistrict && <DistrictCard district={selectedDistrict} meta={meta} pinned onClose={() => { setSelected(null); setHovered(null); }} />}
+    <MaharashtraStory districts={districts} meta={meta} />
+    <MaharashtraInsights districts={districts} />
+    <details id="maharashtra-data-notes" className="mah-data-notes"><summary>Data notes and coverage rules</summary><p>User-supplied workbook; not independently authenticated. Reference years vary or are unspecified. Blank values are unknown, never zero.</p><p>Brihan Mumbai health values are combined and not allocated between Mumbai City and Mumbai Suburban. Palghar has no 2011 census row; Mumbai Suburban has no income value. MPCB regions, RTO subtotals and airport groupings are not district records.</p><p>District polygons come from the OpenCity Maharashtra Districts Map listing, credited to Vaidyanathan R and identified as Survey of India source / public domain. See DATA_SOURCES for the source record and attribution.</p></details>
   </main>;
 }
-
-
-
-
-
-
-
