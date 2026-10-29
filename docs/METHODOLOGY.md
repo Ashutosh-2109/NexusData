@@ -26,3 +26,6 @@ Open-Meteo does not report India's national AQI. NexusData estimates subindices 
 ## Scenario projection
 
 For two numeric series with at least 10 aligned pairs, the correlation engine identifies the relationship. A least-squares slope then projects `target_new = target_latest + slope × (driver_latest × change_percent / 100)`. It is labeled **indicative, correlation-based, not causal**. It assumes the fitted association persists and does not model confounders or intervention effects.
+
+
+Maharashtra focus-district examples are rule-based descriptions of workbook fields (lowest reported health facilities per lakh, highest dropout, lowest income) and are labeled **indicative analysis, not policy guidance**. They do not estimate causal effects or recommend interventions.

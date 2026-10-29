@@ -65,5 +65,12 @@ See [data attribution](docs/DATA_SOURCES.md), [scoring and scenario methodology]
 
 ## Screenshots
 
-<!-- Add an India map screenshot here after UI review. -->
-<!-- Add a city detail and scenario screenshot here after UI review. -->
+Playwright Chromium captures of the Maharashtra module are in [docs/screenshots](docs/screenshots/): [map at rest](docs/screenshots/maharashtra-map-at-rest.png), [hovered Pune detail](docs/screenshots/maharashtra-map-hover-pune.png), [pinned side panel](docs/screenshots/maharashtra-map-pinned-pune.png), [Mumbai-area inset](docs/screenshots/maharashtra-mumbai-inset.png), [no-data hatching](docs/screenshots/maharashtra-no-data-hatching.png), [presentation slides](docs/screenshots/maharashtra-present-slide-1.png), [development-gap slide](docs/screenshots/maharashtra-present-slide-8.png), [dark theme](docs/screenshots/maharashtra-dark-theme.png), and [390px mobile layout](docs/screenshots/maharashtra-mobile-390.png).
+
+## Maharashtra module
+
+The district atlas is available at `/maharashtra`. It loads 36 district boundaries and workbook-derived indicators, ranks, state medians, 1991/2001/2011 census sparklines, a searchable choropleth, district detail cards, and cross-district comparisons. The presentation deck is opened from **Present the story**. Regional MPCB counts, airport traffic, and RTO office rows appear in separate source panels because those source groupings are not district data.
+
+The workbook is user-supplied and has not been independently authenticated. Reference years vary or are unspecified; blanks are unknown, never zero. Brihan Mumbai health counts are not split between Mumbai City and Mumbai Suburban, Palghar has no 2011 census row, and Mumbai Suburban has no income value. Cross-sectional correlation uses Spearman with pairwise sample counts, bootstrap confidence intervals, and multiple-comparison adjustment; associations are exploratory and non-causal. See [data sources](docs/DATA_SOURCES.md), [methodology](docs/METHODOLOGY.md), and [decisions](docs/DECISIONS.md).
+
+Rebuild the workbook JSON with `python scripts/build_maharashtra_data.py`; rebuild boundary GeoJSON with `python scripts/build_maharashtra_geo.py`. The source KML is kept compressed at `data/raw/maharashtra_districts_source.kml.gz`; the generated 36-feature GeoJSON is under `frontend/public/data/`.
