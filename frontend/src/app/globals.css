@@ -24,3 +24,81 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* Maharashtra's editorial map surface; app-wide tokens are introduced in the shell milestone. */
+.mah-page { width: min(100%, 1720px); margin: 0 auto; padding: 32px clamp(16px, 3vw, 48px) 64px; color: #182b3c; background: #f4f7f6; min-height: 100vh; }
+.mah-page-header { display:flex; align-items:flex-end; justify-content:space-between; gap:24px; padding:16px 0 26px; }
+.mah-page-header h1 { margin:5px 0 8px; font:700 clamp(30px,4vw,52px)/1.04 Georgia,serif; letter-spacing:-.035em; color:#10283a; }
+.mah-page-header p { max-width:800px; margin:0; color:#516576; line-height:1.55; font-size:14px; }
+.mah-header-count { display:grid; text-align:right; color:#516576; font-size:12px; white-space:nowrap; }
+.mah-header-count strong { color:#135d75; font:700 40px/1 Georgia,serif; }
+.mah-eyebrow { margin:0 0 5px; color:#277089; font-size:10px; font-weight:800; letter-spacing:.17em; text-transform:uppercase; }
+.mah-data-banner { padding:12px 16px; background:#e9f2ee; border:1px solid #d1e1d9; border-radius:8px; color:#344d4e; font-size:13px; line-height:1.5; }
+.mah-data-banner button { border:0; background:none; color:#11657c; font-weight:750; text-decoration:underline; cursor:pointer; }
+.mah-controls { display:flex; align-items:flex-end; gap:16px; flex-wrap:wrap; padding:20px 0 12px; }
+.mah-controls label { position:relative; display:grid; gap:6px; color:#405667; font-size:11px; font-weight:800; letter-spacing:.04em; }
+.mah-controls select,.mah-controls input { min-height:42px; border:1px solid #c8d4dc; border-radius:7px; background:#fff; color:#183348; padding:9px 12px; font-size:14px; letter-spacing:normal; font-weight:500; }
+.mah-controls select { min-width:min(330px,75vw); }
+.mah-search-label input { min-width:min(270px,75vw); }
+.mah-data-label { margin:0 0 3px auto; color:#637687; font-size:12px; }
+.mah-search-results { position:absolute; z-index:20; top:100%; left:0; right:0; display:grid; padding:5px; background:#fff; border:1px solid #c8d4dc; border-radius:7px; box-shadow:0 14px 32px #15314724; }
+.mah-search-results button { padding:9px; border:0; border-radius:4px; text-align:left; background:transparent; cursor:pointer; color:#1d374a; }
+.mah-search-results button:hover,.mah-search-results button:focus-visible { background:#e9f2f5; }
+.mah-map-layout { display:grid; grid-template-columns:minmax(0,1fr) 300px; gap:16px; align-items:stretch; }
+.mah-map-panel,.mah-ranked-panel,.mah-district-card { background:#fff; border:1px solid #dbe3e7; border-radius:10px; box-shadow:0 5px 20px #1732470d; }
+.mah-map-panel { padding:18px; min-width:0; }
+.mah-map-title { display:flex; align-items:center; justify-content:space-between; gap:12px; }
+.mah-map-title h2,.mah-ranked-panel h2 { margin:0; color:#173147; font:700 21px/1.2 Georgia,serif; }
+.mah-clear-selection,.mah-icon-button { border:1px solid #cbd7df; border-radius:6px; background:#f8fafb; color:#29495d; padding:9px 12px; cursor:pointer; min-height:40px; }
+.mah-map-stage { position:relative; width:100%; overflow:hidden; margin:12px auto 0; background:#f4f8f9; border:1px solid #e4ebee; border-radius:8px; }
+.mah-map-stage svg { display:block; max-width:100%; margin:0 auto; }
+.mah-district-shape { cursor:pointer; outline:none; transform-box:fill-box; transform-origin:center; transition:transform 180ms ease,opacity 180ms ease,stroke-width 180ms ease; }
+.mah-district-shape:hover,.mah-district-shape:focus-visible { stroke:#102b3c; stroke-width:2.5; }
+.mah-district-shape:focus-visible { filter:drop-shadow(0 0 3px #e9a72c); }
+.mah-hover-card { position:absolute; z-index:10; width:min(360px,calc(100% - 16px)); max-height:min(78vh,500px); overflow:auto; border-radius:10px; box-shadow:0 20px 55px #142b3b42; }
+.mah-district-card { padding:15px; color:#1e3445; }
+.mah-district-card header { display:flex; align-items:flex-start; justify-content:space-between; gap:10px; }
+.mah-district-card header h3 { margin:0 0 6px; color:#10283a; font:700 22px/1.1 Georgia,serif; }
+.mah-icon-button { font-size:21px; line-height:1; padding:0; width:40px; }
+.mah-warning-chip { margin:7px 0; padding:8px 10px; color:#70480e; background:#fff4dc; border-left:3px solid #e1a233; font-size:11px; line-height:1.45; }
+.mah-reference-note { margin:5px 0 12px; color:#637687; font-size:11px; line-height:1.4; }
+.mah-field-groups { display:grid; gap:10px; }
+.mah-field-group { border-top:1px solid #e5ebee; padding-top:8px; }
+.mah-field-group h4 { margin:0 0 5px; color:#24576e; font-size:11px; letter-spacing:.08em; text-transform:uppercase; }
+.mah-field-list { display:grid; }
+.mah-stat-row { padding:6px 0; border-bottom:1px solid #f0f3f4; }
+.mah-stat-main { display:flex; justify-content:space-between; gap:12px; font-size:11px; line-height:1.4; }
+.mah-stat-main span { color:#526677; }
+.mah-stat-main strong { text-align:right; color:#17364a; font-size:11px; }
+.mah-stat-meta { display:grid; gap:3px; margin-top:3px; color:#768794; font-size:9px; }
+.mah-median-track { height:4px; width:100%; background:#e7edf0; border-radius:5px; overflow:hidden; }
+.mah-median-track i { display:block; height:100%; background:#43859a; border-radius:5px; }
+.mah-no-data-reason { display:block; margin-top:3px; color:#788895; font-size:10px; line-height:1.4; }
+.mah-sparkline { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:6px; }
+.mah-sparkline span { display:grid; gap:5px; padding:8px; background:#f4f7f8; border-radius:5px; }
+.mah-sparkline b { color:#18394d; font-size:11px; }
+.mah-sparkline small { color:#728390; font-size:10px; }
+.mah-ranked-panel { padding:18px 15px; }
+.mah-ranked-panel h2 { font-size:19px; }
+.mah-ranked-panel p:not(.mah-eyebrow) { color:#657787; font-size:11px; line-height:1.45; }
+.mah-ranked-panel ol { list-style:none; margin:14px 0 0; padding:0; }
+.mah-ranked-panel li { border-top:1px solid #edf1f3; }
+.mah-ranked-panel li.is-active { background:#eaf2f4; }
+.mah-ranked-panel li button { display:grid; width:100%; grid-template-columns:26px minmax(70px,1fr) auto; align-items:center; gap:6px; min-height:45px; border:0; background:transparent; text-align:left; color:#2f4a5c; cursor:pointer; font-size:11px; }
+.mah-ranked-panel li button strong { color:#183a4e; font-size:10px; text-align:right; }
+.mah-rank-number { color:#8394a1; font-variant-numeric:tabular-nums; font-size:10px; }
+.mah-legend { display:flex; justify-content:space-between; gap:20px; align-items:center; margin-top:14px; color:#394f60; font-size:11px; }
+.mah-legend > div:first-child { display:grid; gap:3px; }
+.mah-legend > div:first-child strong { color:#203d52; }
+.mah-legend > div:first-child span,.mah-legend small { color:#768692; font-size:10px; }
+.mah-legend-scale { width:min(340px,56%); }
+.mah-color-ramp { display:flex; height:10px; overflow:hidden; border-radius:4px; }
+.mah-color-ramp i { flex:1; }
+.mah-legend-values { display:flex; justify-content:space-between; gap:8px; margin:4px 0; color:#687b88; font-size:9px; }
+.mah-district-card-pinned { max-width:900px; margin:18px 0 0 auto; padding:20px; }
+.mah-district-card-pinned .mah-field-groups { grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px 24px; }
+.mah-loading,.mah-error { padding:44px; border-radius:12px; background:#fff; color:#365064; }
+.mah-error { border:1px solid #e5b7af; }
+@media (max-width:900px) { .mah-map-layout { grid-template-columns:minmax(0,1fr); } .mah-ranked-panel ol { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:0 16px; } }
+@media (max-width:600px) { .mah-page { padding:20px 14px 44px; } .mah-page-header { align-items:flex-start; } .mah-header-count { padding-top:4px; } .mah-header-count strong { font-size:31px; } .mah-controls { align-items:stretch; gap:10px; } .mah-controls label,.mah-controls select,.mah-controls input { width:100%; } .mah-data-label { margin:0; } .mah-map-panel { padding:11px; } .mah-map-title h2 { font-size:17px; } .mah-hover-card { left:8px !important; right:8px; width:auto; max-height:50vh; top:auto !important; bottom:8px; } .mah-ranked-panel { padding:13px; } .mah-ranked-panel ol { grid-template-columns:1fr; } .mah-legend { align-items:flex-start; flex-direction:column; } .mah-legend-scale { width:100%; } .mah-district-card-pinned { padding:13px; } .mah-district-card-pinned .mah-field-groups { grid-template-columns:1fr; } }
+@media (prefers-reduced-motion:reduce) { .mah-district-shape { transition:none !important; } }
