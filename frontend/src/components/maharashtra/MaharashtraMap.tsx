@@ -7,6 +7,7 @@ import { API_BASE } from '../../config/api';
 import type { DistrictStatistic, FieldInfo, MaharashtraDistrict, MaharashtraGeo, MaharashtraMeta } from './types';
 import MaharashtraInsights from './MaharashtraInsights';
 import MaharashtraStory from './MaharashtraStory';
+import MaharashtraStory from './MaharashtraStory';
 
 const PALETTE = ['#eff6ff', '#c6dbef', '#9ecae1', '#6baed6', '#3182bd', '#08519c'];
 const METRIC_KEYS = [
@@ -238,9 +239,10 @@ export default function MaharashtraMap() {
       </aside>
     </div>
 
-    {selectedDistrict && <DistrictCard district={selectedDistrict} meta={meta} pinned onClose={() => { setSelected(null); setHovered(null); }} />}`r`n    <MaharashtraInsights districts={districts} />`r`n    <details id="maharashtra-data-notes" className="mah-data-notes"><summary>Data notes and coverage rules</summary><p>User-supplied workbook; not independently authenticated. Reference years vary or are unspecified. Blank values are unknown, never zero.</p><p>Brihan Mumbai health values are combined and not allocated between Mumbai City and Mumbai Suburban. Palghar has no 2011 census row; Mumbai Suburban has no income value. MPCB regions, RTO subtotals and airport groupings are not district records.</p><p>District polygons come from the OpenCity Maharashtra Districts Map listing, credited to Vaidyanathan R and identified as Survey of India source / public domain. See DATA_SOURCES for the source record and attribution.</p></details>
+    {selectedDistrict && <DistrictCard district={selectedDistrict} meta={meta} pinned onClose={() => { setSelected(null); setHovered(null); }} />}`r`n    <MaharashtraStory districts={districts} meta={meta} />`r`n    <MaharashtraInsights districts={districts} />`r`n    <details id="maharashtra-data-notes" className="mah-data-notes"><summary>Data notes and coverage rules</summary><p>User-supplied workbook; not independently authenticated. Reference years vary or are unspecified. Blank values are unknown, never zero.</p><p>Brihan Mumbai health values are combined and not allocated between Mumbai City and Mumbai Suburban. Palghar has no 2011 census row; Mumbai Suburban has no income value. MPCB regions, RTO subtotals and airport groupings are not district records.</p><p>District polygons come from the OpenCity Maharashtra Districts Map listing, credited to Vaidyanathan R and identified as Survey of India source / public domain. See DATA_SOURCES for the source record and attribution.</p></details>
   </main>;
 }
+
 
 
 
