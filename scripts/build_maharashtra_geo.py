@@ -12,6 +12,7 @@ try:
 except ImportError:
     from build_maharashtra_data import DEFAULT_OUTPUT, canonical_name, slug
 from shapely.geometry import Polygon
+from shapely.geometry.polygon import orient
 
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_SOURCE = ROOT / "data/raw/maharashtra_districts_source.kml.gz"
@@ -81,7 +82,13 @@ def polygons_for(placemark: ET.Element, tolerance: float) -> list[list[list[list
         if len(exterior) < 4:
             continue
         holes = [parse_coordinates(inner) for inner in polygon.findall("k:innerBoundaryIs/k:LinearRing", KML_NS)]
-        shape = Polygon(exterior, [ring for ring in holes if len(ring) >= 4]).simplify(tolerance, preserve_topology=True)
+        original = Polygon(exterior, [ring for ring in holes if len(ring) >= 4])
+        shape = original.simplify(tolerance, preserve_topology=True)
+        if shape.is_empty or shape.area <= 0 or not shape.is_valid:
+            shape = original
+        # d3-geo interprets RFC-7946 exterior winding as a spherical complement;
+        # orient outer rings clockwise and holes counter-clockwise for its path engine.
+        shape = orient(shape, sign=-1.0)
         simplified = [list(map(list, shape.exterior.coords))]
         simplified.extend([list(map(list, ring.coords)) for ring in shape.interiors])
         polygons.append(simplified)
