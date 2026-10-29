@@ -5,6 +5,8 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { Feature, GeoPermissibleObjects, Geometry } from 'geojson';
 import { API_BASE } from '../../config/api';
 import type { DistrictStatistic, FieldInfo, MaharashtraDistrict, MaharashtraGeo, MaharashtraMeta } from './types';
+import MaharashtraInsights from './MaharashtraInsights';
+import MaharashtraStory from './MaharashtraStory';
 
 const PALETTE = ['#eff6ff', '#c6dbef', '#9ecae1', '#6baed6', '#3182bd', '#08519c'];
 const METRIC_KEYS = [
@@ -109,13 +111,13 @@ export default function MaharashtraMap() {
   const [search, setSearch] = useState('');
   const [cursor, setCursor] = useState({ x: 20, y: 20 });
   const [size, setSize] = useState({ width: 720, height: 540 });
-  const [reducedMotion, setReducedMotion] = useState(false);
+
   const hostRef = useRef<HTMLDivElement>(null);
   const svgRef = useRef<SVGSVGElement>(null);
   const pathRefs = useRef<Record<string, SVGPathElement | null>>({});
   const prefersReducedMotion = useReducedMotion();
 
-  useEffect(() => setReducedMotion(prefersReducedMotion), [prefersReducedMotion]);
+  const reducedMotion = prefersReducedMotion;
   useEffect(() => {
     const controller = new AbortController();
     Promise.all([
@@ -191,7 +193,7 @@ export default function MaharashtraMap() {
         {METRIC_KEYS.map(key => <option key={key} value={key}>{meta.data_dictionary[key]?.label ?? key}</option>)}
       </select></label>
       <label className="mah-search-label">Find district<input type="search" value={search} onChange={event => setSearch(event.target.value)} placeholder="Search by district name" aria-label="Search Maharashtra districts" />
-        {!!search && <div className="mah-search-results" role="listbox">{searchResults.map(district => <button key={district.id} type="button" role="option" onMouseEnter={() => setFocus(district.name)} onClick={() => { setSelected(district.name); setHovered(district.name); setSearch(''); }}>{district.name}</button>)}</div>}
+        {!!search && <div className="mah-search-results" role="listbox">{searchResults.map(district => <button key={district.id} type="button" role="option" aria-selected="false" onMouseEnter={() => setFocus(district.name)} onClick={() => { setSelected(district.name); setHovered(district.name); setSearch(''); }}>{district.name}</button>)}</div>}
       </label>
       <p className="mah-data-label">{valid.length} of 36 districts have data · reference years vary / unspecified</p>
     </section>
@@ -236,6 +238,12 @@ export default function MaharashtraMap() {
       </aside>
     </div>
 
-    {selectedDistrict && <DistrictCard district={selectedDistrict} meta={meta} pinned onClose={() => { setSelected(null); setHovered(null); }} />}
+    {selectedDistrict && <DistrictCard district={selectedDistrict} meta={meta} pinned onClose={() => { setSelected(null); setHovered(null); }} />}`r`n    <MaharashtraInsights districts={districts} />`r`n    <details id="maharashtra-data-notes" className="mah-data-notes"><summary>Data notes and coverage rules</summary><p>User-supplied workbook; not independently authenticated. Reference years vary or are unspecified. Blank values are unknown, never zero.</p><p>Brihan Mumbai health values are combined and not allocated between Mumbai City and Mumbai Suburban. Palghar has no 2011 census row; Mumbai Suburban has no income value. MPCB regions, RTO subtotals and airport groupings are not district records.</p><p>District polygons come from the OpenCity Maharashtra Districts Map listing, credited to Vaidyanathan R and identified as Survey of India source / public domain. See DATA_SOURCES for the source record and attribution.</p></details>
   </main>;
 }
+
+
+
+
+
+
