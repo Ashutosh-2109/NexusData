@@ -39,6 +39,7 @@ describe('Maharashtra district map',()=>{
     shape.focus();
     fireEvent.keyDown(shape,{key:'Enter'});
     expect(screen.getByLabelText('Alpha district statistics')).toBeTruthy();
+    expect(document.querySelector('.mah-selected-panel')).toBeTruthy();
     fireEvent.keyDown(shape,{key:'Escape'});
     await waitFor(()=>expect(screen.queryByLabelText('Alpha district statistics')).toBeNull());
   });

@@ -167,3 +167,8 @@ body {
 .mah-insights-grid > * { min-width:0; }
 .mah-layer-list,.mah-layer-list article,.mah-layer-list span { min-width:0; overflow-wrap:anywhere; }
 @media(max-width:800px) { .mah-insights-grid { grid-template-columns:minmax(0,1fr); } }
+.mah-map-layout.has-selection { grid-template-columns:minmax(0,1fr) minmax(300px,390px); }
+.mah-selected-panel { min-width:0; padding:0; border:0; background:transparent; box-shadow:none; }
+.mah-selected-panel .mah-district-card-pinned { max-height:min(720px,calc(100vh - 140px)); margin:0; overflow:auto; }
+@media(max-width:900px) { .mah-map-layout.has-selection { grid-template-columns:minmax(0,1fr); } .mah-selected-panel .mah-district-card-pinned { max-height:none; } }
+.mah-selected-panel .mah-district-card-pinned .mah-field-groups { grid-template-columns:minmax(0,1fr); }

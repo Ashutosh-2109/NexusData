@@ -205,7 +205,7 @@ export default function MaharashtraMap() {
       <p className="mah-data-label">{valid.length} of 36 districts have data · reference years vary / unspecified</p>
     </section>
 
-    <div className="mah-map-layout" onMouseLeave={() => { if (!selected) setHovered(null); }}>
+    <div className={`mah-map-layout${selectedDistrict ? ' has-selection' : ''}`} onMouseLeave={() => { if (!selected) setHovered(null); }}>
       <section className="mah-map-panel" aria-label="Maharashtra district map">
         <div className="mah-map-title"><div><p className="mah-eyebrow">DISTRICT CHOROPLETH</p><h2>{fieldInfo?.label ?? 'District map'}</h2></div>
           {selectedDistrict && <button className="mah-clear-selection" type="button" onClick={() => setSelected(null)}>Clear pinned district</button>}
@@ -243,14 +243,12 @@ export default function MaharashtraMap() {
         </div>
         <div className="mah-legend"><div><strong>{fieldInfo?.label ?? metric}</strong><span>{fieldInfo?.unit ?? ''}</span></div><div className="mah-legend-scale"><div className="mah-color-ramp" aria-hidden="true">{PALETTE.map(color => <i key={color} style={{ background: color }} />)}</div><div className="mah-legend-values"><span>Min {formatValue(cuts[0], fieldInfo)}</span><span>Median {formatValue(cuts[2], fieldInfo)}</span><span>Max {formatValue(cuts.at(-1), fieldInfo)}</span></div><small>Hatched fill = no data</small></div></div>
       </section>
-      <aside className="mah-ranked-panel"><div><p className="mah-eyebrow">DISTRICT RANKING</p><h2>Highest reported values</h2><p>Ranked among districts with data; high value is rank 1.</p></div>
+      <aside className={selectedDistrict ? "mah-ranked-panel mah-selected-panel" : "mah-ranked-panel"}>{selectedDistrict ? <DistrictCard district={selectedDistrict} meta={meta} pinned onClose={() => { setSelected(null); setHovered(null); }} /> : <><div><p className="mah-eyebrow">DISTRICT RANKING</p><h2>Highest reported values</h2><p>Ranked among districts with data; high value is rank 1.</p></div>
         <ol>{ranked.map((district, index) => <li key={district.id} className={hovered === district.name || selected === district.name ? 'is-active' : ''} onMouseEnter={() => setFocus(district.name)} onMouseLeave={() => { if (!selected) setHovered(null); }}>
           <button type="button" onFocus={() => setFocus(district.name)} onBlur={() => { if (!selected) setHovered(null); }} onClick={() => { setSelected(district.name); setHovered(district.name); }}><span className="mah-rank-number">{String(index + 1).padStart(2, '0')}</span><span>{district.name}</span><strong>{formatValue(metricValue(district, metric), fieldInfo)}</strong></button>
-        </li>)}</ol>
-      </aside>
+        </li>)}</ol></>}</aside>
     </div>
 
-    {selectedDistrict && <DistrictCard district={selectedDistrict} meta={meta} pinned onClose={() => { setSelected(null); setHovered(null); }} />}
     <MaharashtraStory districts={districts} meta={meta} />
     <MaharashtraInsights districts={districts} />
     <details id="maharashtra-data-notes" className="mah-data-notes"><summary>Data notes and coverage rules</summary><p>User-supplied workbook; not independently authenticated. Reference years vary or are unspecified. Blank values are unknown, never zero.</p><p>Brihan Mumbai health values are combined and not allocated between Mumbai City and Mumbai Suburban. Palghar has no 2011 census row; Mumbai Suburban has no income value. MPCB regions, RTO subtotals and airport groupings are not district records.</p><p>District polygons come from the OpenCity Maharashtra Districts Map listing, credited to Vaidyanathan R and identified as Survey of India source / public domain. See DATA_SOURCES for the source record and attribution.</p></details>

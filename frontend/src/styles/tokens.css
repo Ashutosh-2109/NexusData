@@ -19,6 +19,12 @@
   --nd-radius-lg: 14px;
   --nd-shadow-card: 0 8px 28px rgb(18 49 65 / 8%);
   --nd-motion: 180ms ease;
+  --nd-type-xs: 0.75rem;
+  --nd-type-sm: 0.875rem;
+  --nd-type-base: 1rem;
+  --nd-type-lg: 1.125rem;
+  --nd-type-xl: 1.25rem;
+  --nd-type-display: clamp(2rem, 4.5vw, 3.5rem);
 }
 .app-shell { min-height:100vh; display:flex; background:var(--nd-canvas); color:var(--nd-ink); font-family:var(--font-body),sans-serif; }
 .app-sidebar { position:sticky; top:0; display:flex; flex:0 0 246px; flex-direction:column; height:100vh; padding:17px 12px 14px; background:#122b3b; color:#e8f0f2; transition:flex-basis var(--nd-motion); z-index:30; }
