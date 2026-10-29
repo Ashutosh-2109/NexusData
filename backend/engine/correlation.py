@@ -155,12 +155,19 @@ def discover_correlations(
     df: pd.DataFrame,
     file_summaries: Optional[List[Dict[str, Any]]] = None,
     min_samples: int = 10,
-    prefer_cross_dataset: bool = True
+    prefer_cross_dataset: bool = True,
+    mode: str = "temporal",
+    unit_key: str = "Standardized_Time",
+    bootstrap_samples: int = 500,
 ) -> List[Dict[str, Any]]:
     """
     Main entry point for Statistical Correlation Engine.
     Discovers, scores, and ranks pairwise numerical relationships across datasets.
     """
+    if mode == "cross_sectional":
+        return discover_cross_sectional_correlations(df, unit_key, min_samples, bootstrap_samples)
+    if mode != "temporal":
+        raise ValueError("mode must be 'temporal' or 'cross_sectional'")
     if df.empty or len(df.columns) < 2:
         return []
         
@@ -224,4 +231,78 @@ def discover_correlations(
             reverse=True
         )
 
+    return results
+
+
+def _benjamini_hochberg(p_values: list[float | None]) -> list[float | None]:
+    """Benjamini-Hochberg adjusted p values, preserving the original order."""
+    valid = sorted(((float(value), index) for index, value in enumerate(p_values) if value is not None and np.isfinite(value)))
+    output: list[float | None] = [None] * len(p_values)
+    running = 1.0
+    total = len(valid)
+    for rank_index in range(total - 1, -1, -1):
+        p_value, original_index = valid[rank_index]
+        rank = rank_index + 1
+        running = min(running, p_value * total / rank)
+        output[original_index] = round(min(running, 1.0), 6)
+    return output
+
+
+def discover_cross_sectional_correlations(
+    df: pd.DataFrame,
+    unit_key: str = "district",
+    min_samples: int = 10,
+    bootstrap_samples: int = 500,
+) -> List[Dict[str, Any]]:
+    """Analyze one row per district; Spearman is primary with bootstrap CIs and BH adjustment."""
+    if unit_key not in df.columns:
+        raise ValueError(f"Cross-sectional mode requires unit key '{unit_key}'")
+    if df[unit_key].isna().any() or df[unit_key].astype(str).duplicated().any():
+        raise ValueError(f"Cross-sectional unit key '{unit_key}' must be present and unique")
+    candidates = [column for column in df.columns if column != unit_key and pd.api.types.is_numeric_dtype(df[column])]
+    results: list[dict[str, Any]] = []
+    rng = np.random.default_rng(20261029)
+    for col_a, col_b in itertools.combinations(candidates, 2):
+        valid = df[[col_a, col_b]].replace([np.inf, -np.inf], np.nan).dropna()
+        n = len(valid)
+        if n < min_samples or valid[col_a].nunique() < 2 or valid[col_b].nunique() < 2:
+            continue
+        x = valid[col_a].to_numpy(dtype=float)
+        y = valid[col_b].to_numpy(dtype=float)
+        rho, p_value = stats.spearmanr(x, y)
+        if not np.isfinite(rho):
+            continue
+        indices = rng.integers(0, n, size=(bootstrap_samples, n))
+        sampled_x, sampled_y = x[indices], y[indices]
+        rank_x = stats.rankdata(sampled_x, axis=1)
+        rank_y = stats.rankdata(sampled_y, axis=1)
+        rank_x -= rank_x.mean(axis=1, keepdims=True)
+        rank_y -= rank_y.mean(axis=1, keepdims=True)
+        denominator = np.sqrt((rank_x ** 2).sum(axis=1) * (rank_y ** 2).sum(axis=1))
+        bootstrap_values = np.divide((rank_x * rank_y).sum(axis=1), denominator,
+                                     out=np.full(bootstrap_samples, np.nan), where=denominator > 0)
+        bootstrap_values = bootstrap_values[np.isfinite(bootstrap_values)]
+        ci = np.quantile(bootstrap_values, [0.025, 0.975]).tolist() if len(bootstrap_values) >= max(30, bootstrap_samples // 4) else [None, None]
+        # Pearson is retained for context and compatibility; ranking uses Spearman only.
+        pearson = stats.pearsonr(x, y).statistic
+        results.append({
+            "dataset_a": "Maharashtra district snapshot", "variable_a": col_a,
+            "dataset_b": "Maharashtra district snapshot", "variable_b": col_b,
+            "analysis_unit": unit_key, "sample_count": int(n), "n": int(n),
+            "spearman": round(float(rho), 4), "primary_measure": "Spearman's rho",
+            "pearson": round(float(pearson), 4) if np.isfinite(pearson) else None,
+            "p_value": round(float(p_value), 6) if np.isfinite(p_value) else None,
+            "spearman_ci_95": [round(float(value), 4) if value is not None else None for value in ci],
+            "rank_score": round(abs(float(rho)), 4),
+            "relationship_strength": classify_strength(float(rho)),
+            "is_cross_dataset": False,
+        })
+    adjusted = _benjamini_hochberg([item["p_value"] for item in results])
+    for item, q_value in zip(results, adjusted):
+        item["q_value_bh"] = q_value
+        item["multiple_comparison_warning"] = (
+            f"Exploratory: {len(results)} district-level pairs tested; report the BH-adjusted q value and 95% bootstrap CI. "
+            "Associations are not causal, and the source years vary or are unspecified."
+        )
+    results.sort(key=lambda item: (abs(item["spearman"]), item["n"]), reverse=True)
     return results

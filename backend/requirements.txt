@@ -9,3 +9,5 @@ scipy
 scikit-learn
 python-dotenv
 requests
+openpyxl
+shapely

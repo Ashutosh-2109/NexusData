@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { CircleMarker, GeoJSON, MapContainer, TileLayer, Tooltip } from 'react-leaflet';
 import type { FeatureCollection } from 'geojson';
 import type { LiveCity, Metric, FocusArea } from './types';
-import { metricColor, metricValue, stateAverages } from './mapUtils';
+import { METRIC_LABELS, metricColor, metricValue, stateAverages } from './mapUtils';
 
 interface Props { cities: LiveCity[]; metric: Metric; selected: string | null; focus: FocusArea | 'all'; choropleth: boolean; onSelect: (name: string) => void }
 
@@ -27,7 +27,7 @@ export default function IndiaMapCanvas({ cities, metric, selected, focus, chorop
       return <CircleMarker key={city.name} center={[city.lat, city.lon]} radius={selected === city.name ? 14 : value === null ? 6 : 7 + Math.min(Math.abs(value) / (metric === 'aqi' ? 50 : 25), 7)}
         pathOptions={{ color: selected === city.name ? '#fff' : '#0f172a', weight: selected === city.name ? 3 : 1.5, fillColor: metricColor(metric, value), fillOpacity: .9 }}
         eventHandlers={{ click: () => onSelect(city.name) }}>
-        <Tooltip>{city.name} · {value === null ? 'No data' : value.toFixed(1)}</Tooltip>
+        <Tooltip>{city.name} · {METRIC_LABELS[metric]}: {value === null ? 'No data' : value.toFixed(1)}</Tooltip>
       </CircleMarker>;
     })}
   </MapContainer>;

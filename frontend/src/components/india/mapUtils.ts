@@ -1,7 +1,7 @@
 import type { LiveCity, Metric } from './types';
 
 export const METRIC_LABELS: Record<Metric, string> = {
-  aqi: 'Indian AQI estimate', pm25: 'PM2.5 (µg/m³)', temperature: 'Temperature (°C)',
+  aqi: 'Indian AQI — estimated (model-based)', pm25: 'PM2.5 (µg/m³)', temperature: 'Temperature (°C)',
   humidity: 'Humidity (%)', load_MW: 'Electricity load (MW)',
 };
 

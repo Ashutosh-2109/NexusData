@@ -9,6 +9,7 @@ from engine.visualization import get_scatter_data, get_timeseries_data, get_dist
 from live.routes import router as live_router
 from live.service import service as live_service
 from storage import load_merged, save_merged
+from maharashtra_routes import router as maharashtra_router
 import os
 import io
 import json
@@ -20,6 +21,7 @@ from typing import Optional, List, Dict, Any
 
 app = FastAPI(title="Cross-Domain Insight Discovery Engine API")
 app.include_router(live_router)
+app.include_router(maharashtra_router)
 
 class JSONFormatter(logging.Formatter):
     def format(self, record):

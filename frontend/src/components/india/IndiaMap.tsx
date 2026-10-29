@@ -122,6 +122,6 @@ export default function IndiaMap() {
       </aside>
     </div>
     <div className="flex flex-wrap gap-3 items-center text-[11px] text-slate-400"><span className="font-semibold text-slate-300">Indian AQI bands:</span>{[['Good','#22c55e'],['Satisfactory','#84cc16'],['Moderate','#eab308'],['Poor','#f97316'],['Very poor','#ef4444'],['Severe','#7e22ce']].map(([label,color]) => <span key={label} className="flex items-center gap-1"><i className="w-2.5 h-2.5 rounded-full" style={{ background: color }} />{label}</span>)}</div>
-    <p className="text-[11px] text-slate-500">Open-Meteo weather and CAMS air-quality model data; map tiles © OpenStreetMap contributors. AQI is a model-derived Indian-index estimate, not a CPCB station reading. Indicative analysis for exploration, not official policy guidance.</p>
+    <p className="text-[11px] text-slate-500">Open-Meteo weather and CAMS air-quality model data; map tiles © OpenStreetMap contributors. Indian AQI values are estimated (model-based), not CPCB station readings. Indicative analysis, not policy guidance.</p>
   </section>;
 }
